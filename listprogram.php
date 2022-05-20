@@ -27,15 +27,15 @@ if (isset($_POST['insert'])) {
     $sql = $insertdata->insertlist($list, $age, $sex, $dateprogram);
     if ($sql) {
         echo "<script>alert('ข้อมูลบันทึกสำเร็จ!');</script>";
-        //echo "<script>window.location.href='record.php'</script>";
+        //echo "<script>window.location.href='listprogram.php'</script>";
     } else {
         echo "<script>alert('มีบางอย่างผิดพลาด กรุณาลองใหม่');</script>";
-        //echo "<script>window.location.href='record.php'</script>";
+        //echo "<script>window.location.href='listprogram.php'</script>";
     }
 }
 
 //แก้ไขข้อมูล
-if (isset($_POST['update'])) {
+if (isset($_POST['updatelist'])) {
     $id = $_POST['id'];
     $list = $_POST['list'];
     $age = $_POST['age'];
@@ -45,10 +45,10 @@ if (isset($_POST['update'])) {
     $sql = $updatedata->updatelist($id, $list, $age, $sex, $dateprogram);
     if ($sql) {
         echo "<script>alert('ข้อมูลบันทึกสำเร็จ!');</script>";
-        //echo "<script>window.location.href='listprogram.php'</script>";
+        echo "<script>window.location.href='listprogram.php'</script>";
     } else {
         echo "<script>alert('มีบางอย่างผิดพลาด กรุณาลองใหม่');</script>";
-        //echo "<script>window.location.href='record.php'</script>";
+        echo "<script>window.location.href='listprogram.php'</script>";
     }
 }
 ?>
@@ -62,7 +62,7 @@ if (isset($_POST['update'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Record Match</title>
+    <title>รายการการแข่งขัน</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
         integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
@@ -170,7 +170,7 @@ if (isset($_POST['update'])) {
             <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">list program</a></li>
+                        <li class="breadcrumb-item"><a href="listprogram.php">รายการการแข่งขัน</a></li>
                     </ol>
                 </nav>
                 <div class="container">
@@ -220,7 +220,7 @@ if (isset($_POST['update'])) {
                                                 aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
-                                                        <form action="record.php" method="post">
+                                                        <form action="listprogram.php" method="post">
                                                             <div class="modal-header">
                                                                 <div class="container row col-lg-12">
                                                                     <!-- แก้ไขบันทึกการแข่งขัน -->
@@ -298,7 +298,7 @@ if (isset($_POST['update'])) {
                                                                             required>
                                                                     </div>
                                                                     <!-- ปุ่มบันทึกการแก้ไข -->
-                                                                    <button type="submit" name="update"
+                                                                    <button type="submit" name="updatelist"
                                                                         class="btn btn-success ">แก้ไขข้อมูล</button>
                                                                     <button type="button" class="btn btn-danger"
                                                                         data-dismiss="modal">ยกเลิก!</button>

@@ -72,7 +72,7 @@ if (isset($_POST['update'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Record Match</title>
+    <title>บันทึกผลการแข่งขัน</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
         integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
@@ -180,14 +180,9 @@ if (isset($_POST['update'])) {
             <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Record Match</a></li>
+                        <li class="breadcrumb-item"><a href="record.php">บันทึกผลการแข่งขัน</a></li>
                     </ol>
                 </nav>
-                <h1 class="h2">Dashboard</h1>
-                <p>ข้อมูลต่างๆและรายละเอียดต่างๆ</p>
-                <div class="row my-4">
-
-                </div>
                 <div class="container">
                     <div class="card mb-3">
                         <img src="image/Ss.png" class="card-img-top" alt="...">

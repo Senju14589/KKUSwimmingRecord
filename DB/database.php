@@ -14,45 +14,5 @@ if ($link === false) {
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
 
-class DB_con
-{
 
-    function __construct()
-    {
-        $conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
-        $this->dbcon = $conn;
-
-        if (mysqli_connect_errno()) {
-            echo "Failed to connect to MySQL : " . mysqli_connect_error();
-        }
-    }
-
-    //ดึงข้อมูลในdatabaseของrecord
-    public function fetchdata()
-    {
-        $result = mysqli_query($this->dbcon, "SELECT * FROM listprogram");
-        return $result;
-    }
-
-    public function fetchonerecord($id)
-    {
-        $result = mysqli_query($this->dbcon, "SELECT * FROM listprogram WHERE id = '$id'");
-        return $result;
-    }
-    //ลบข้อมูล
-    public function delete($id)
-    {
-        $deleterecord = mysqli_query($this->dbcon, "DELETE FROM listprogram WHERE id = '$id'");
-        return $deleterecord;
-    }
-    //เพิ่มข้อมูล
-    public function insert($list, $age, $sex, $dateprogram)
-    {
-        $result = mysqli_query($this->dbcon, "INSERT INTO listprogram(list, age, sex, dateprogram) 
-        VALUES('$list', '$age', '$sex', '$dateprogram')");
-        return $result;
-    }
-    //อัพเดตข้อมูล
-
-    //------------------------------------------------------------------------------------------------------------------------------------
-}
+    //----------------------------------------------------------------------------------------------------------------------------------

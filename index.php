@@ -5,62 +5,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KKU Swimming</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.jqueryui.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="image/favicon.ico">
     <style>
-        tbody {
-            text-align: center;
-        }
+    tbody {
+        text-align: center;
+    }
 
-        #customers thead {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: center;
-            background-color: #7AA1D2;
-            color: white;
-        }
+    #customers thead {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #7AA1D2;
+        color: white;
+    }
     </style>
     <style>
+    .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 100;
+        padding: 90px 0 0;
+        box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+        z-index: 99;
+    }
+
+    @media (max-width: 767.98px) {
         .sidebar {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 100;
-            padding: 90px 0 0;
-            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-            z-index: 99;
+            top: 11.5rem;
+            padding: 0;
         }
+    }
 
-        @media (max-width: 767.98px) {
-            .sidebar {
-                top: 11.5rem;
-                padding: 0;
-            }
-        }
+    .navbar {
+        box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .1);
+    }
 
+    @media (min-width: 767.98px) {
         .navbar {
-            box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .1);
+            top: 0;
+            position: sticky;
+            z-index: 999;
         }
+    }
 
-        @media (min-width: 767.98px) {
-            .navbar {
-                top: 0;
-                position: sticky;
-                z-index: 999;
-            }
-        }
+    .sidebar .nav-link {
+        color: #333;
+    }
 
-        .sidebar .nav-link {
-            color: #333;
-        }
-
-        .sidebar .nav-link.active {
-            color: #0d6efd;
-        }
+    .sidebar .nav-link.active {
+        color: #0d6efd;
+    }
     </style>
 </head>
 
@@ -73,12 +74,14 @@
                     <h4>KKU Swimming</h4>
                 </font>
             </a>
-            <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-toggle="collapse"
+                data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-expanded="false">
                 Hello, John Doe
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -118,7 +121,7 @@
             <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
                     </ol>
                 </nav>
                 <h1 class="h2">Dashboard</h1>
@@ -207,15 +210,15 @@
                                         while ($row = mysqli_fetch_array($sql)) {
 
                                         ?>
-                                            <tr>
-                                                <td><?php echo $row['id']; ?></td>
-                                                <td><?php echo $row['list']; ?></td>
-                                                <td><?php echo $row['age']; ?></td>
-                                                <td><?php echo $row['sex']; ?></td>
-                                                <td><?php echo $row['statistics']; ?></td>
-                                                <td><?php echo $row['number']; ?></td>
-                                                <td><?php echo $row['style']; ?></td>
-                                            </tr>
+                                        <tr>
+                                            <td><?php echo $row['id']; ?></td>
+                                            <td><?php echo $row['list']; ?></td>
+                                            <td><?php echo $row['age']; ?></td>
+                                            <td><?php echo $row['sex']; ?></td>
+                                            <td><?php echo $row['statistics']; ?></td>
+                                            <td><?php echo $row['number']; ?></td>
+                                            <td><?php echo $row['style']; ?></td>
+                                        </tr>
                                         <?php
 
                                         }
@@ -251,13 +254,13 @@
                                         while ($row = mysqli_fetch_array($sql)) {
 
                                         ?>
-                                            <tr>
-                                                <td><?php echo $row['id']; ?></td>
-                                                <td><?php echo $row['list']; ?></td>
-                                                <td><?php echo $row['age']; ?></td>
-                                                <td><?php echo $row['sex']; ?></td>
-                                                <td><?php echo $row['dateprogram']; ?></td>
-                                            </tr>
+                                        <tr>
+                                            <td><?php echo $row['id']; ?></td>
+                                            <td><?php echo $row['list']; ?></td>
+                                            <td><?php echo $row['age']; ?></td>
+                                            <td><?php echo $row['sex']; ?></td>
+                                            <td><?php echo $row['dateprogram']; ?></td>
+                                        </tr>
                                         <?php
 
                                         }
@@ -285,9 +288,11 @@
         </main>
     </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <!-- Github buttons -->
@@ -296,18 +301,18 @@
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.jqueryui.min.js"></script>
     <script type="text/javascript">
-        $('#example').DataTable();
+    $('#example').DataTable();
     </script>
     <script>
-        new Chartist.Line('#traffic-chart', {
-            labels: ['January', 'Februrary', 'March', 'April', 'May', 'June'],
-            series: [
-                [23000, 25000, 19000, 34000, 56000, 64000]
-            ]
-        }, {
-            low: 0,
-            showArea: true
-        });
+    new Chartist.Line('#traffic-chart', {
+        labels: ['January', 'Februrary', 'March', 'April', 'May', 'June'],
+        series: [
+            [23000, 25000, 19000, 34000, 56000, 64000]
+        ]
+    }, {
+        low: 0,
+        showArea: true
+    });
     </script>
 </body>
 

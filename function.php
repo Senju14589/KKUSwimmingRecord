@@ -40,7 +40,8 @@ class DB_con
         VALUES('$list', '$age', '$sex', '$statistics', '$number', '$style')");
         return $result;
     }
-    //อัพเดตข้อมูล
+
+    //อัพเดตข้อมูล record
     public function update($id, $list, $age, $sex, $statistics, $number, $style)
     {
         $result = mysqli_query($this->dbcon, "UPDATE record SET 
@@ -54,6 +55,8 @@ class DB_con
         ");
         return $result;
     }
+
+    //------------------------------------------------------------------------------------------------------------------------------------
 
     //ดึงข้อมูลในdatabaseของ listprogram
     public function fetchdata1()
@@ -80,7 +83,7 @@ class DB_con
     //อัพเดตข้อมูลlistprpgram
     public function updatelist($id, $list, $age, $sex, $dateprogram)
     {
-        $result = mysqli_query($this->dbcon, "UPDATE record SET 
+        $result = mysqli_query($this->dbcon, "UPDATE listprogram SET 
             list = '$list',
             age = '$age',
             sex = '$sex',
