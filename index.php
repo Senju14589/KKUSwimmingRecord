@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KKU Swimming</title>
+    <title>Satit KKU Swimming</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
         integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
@@ -67,11 +67,11 @@
 
 <body>
     <nav class="navbar navbar-light bg-light p-3">
-        <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
-            <img src="image/1 KKU new.png" width="20" height="60" class="card-img-top" alt="..."> &nbsp;&nbsp;&nbsp;
+        <div class="d-flex col-12 col-md-3 col-lg-2 mb-0 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
+            <img src="image/1 KKU new.png" alt="" width="60" height="60" class="d-inline-block align-text-center">
             <a class="navbar-brand py-3 " href="index.php">
                 <font color="black">
-                    <h4>KKU Swimming</h4>
+                    <h4>SATIT KKU Swimming</h4>
                 </font>
             </a>
             <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-toggle="collapse"
@@ -80,9 +80,9 @@
             </button>
         </div>
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-expanded="false">
-                Hello, John Doe
+            <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-expanded="false">
+                สวัสดีโค้ช, John Doe
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <li><a class="dropdown-item" href="#">Sign out</a></li>
@@ -92,7 +92,7 @@
     </nav>
     <div class="container-fluid">
         <div class="row">
-            <nav id="sidebar" class="col-md-3 col-lg-2 my-3 d-md-block bg-light sidebar collapse ">
+            <nav id="sidebar" class="col-md-3 col-lg-2 my-0 d-md-block bg-light sidebar collapse ">
                 <div class="position-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
@@ -111,7 +111,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="sportuser.php">
                                 <span class="ml-2">ข้อมูลต่างๆของนักกีฬา</span>
                             </a>
                         </li>
@@ -124,67 +124,103 @@
                         <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
                     </ol>
                 </nav>
-                <h1 class="h2">Dashboard</h1>
-                <p>ข้อมูลต่างๆและรายละเอียดต่างๆ</p>
-                <div class="row my-4">
 
-                </div>
-                <h3 class="h4">ท่าว่ายน้ำ</h3>
-                <p>The card shows the information of each type of swimming posture.</p>
-                <div class="row my-4">
-                    <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                        <img src="image/freestyle.jpg" class="card-img-top" width="50" height="150" alt="...">
-                        <div class="card">
-                            <h5 class="card-header">Freestyle</h5>
-                            <div class="card-body">
-                                <p class="card-text">- Freestyle arm action</p>
-                                <p class="card-text text-success">Distance</p>
-                                <p>- 50 meters</p>
-                                <p>- 100 meters</p>
-                                <p>- 200 meters</p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h1 class="h2">Dashboard</h1>
+                                    <p>ข้อมูลต่างๆและรายละเอียดต่างๆ</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
-                        <img src="image/Backstroke.jpg" class="card-img-top" width="50" height="150" alt="...">
-                        <div class="card">
-                            <h5 class="card-header">Backstroke</h5>
-                            <div class="card-body">
-                                <p class="card-text">- Backstroke arm action</p>
-                                <p class="card-text text-success">Distance</p>
-                                <p>- 50 meters</p>
-                                <p>- 100 meters</p>
-                                <p>- 200 meters</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
-                        <img src="image/Butterfly.jpg" class="card-img-top" width="50" height="150" alt="...">
-                        <div class="card">
-                            <h5 class="card-header">Butterfly</h5>
-                            <div class="card-body">
-                                <p class="card-text">- Butterfly arm action</p>
-                                <p class="card-text text-success">Distance</p>
-                                <p>- 50 meters</p>
-                                <p>- 100 meters</p>
-                                <p>- 200 meters</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
-                        <img src="image/Breaststroke.jpg" class="card-img-top" width="50" height="150" alt="...">
-                        <div class="card">
-                            <h5 class="card-header">Breaststroke</h5>
-                            <div class="card-body">
-                                <p class="card-text">- Breaststroke arm action</p>
-                                <p class="card-text text-success">Distance</p>
-                                <p>- 50 meters</p>
-                                <p>- 100 meters</p>
-                                <p>- 200 meters</p>
+                        <div class="col-sm-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card">
+                                        <h5 class="card-header">ข้อมูลต่างๆของนักกีฬา</h5>
+                                        <h9 class="card-header mt-2">กราฟแสดงข้อมูลโดยรวมของนักกีฬา</h9>
+                                        <div class="card-body">
+                                            <div id="traffic-chart"></div>
+                                        </div>
+                                    </div>
+                                    <a href="sportuser.php" class="card-link">ข้อมูลโดยรวมของนักกีฬา</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="container mt-3">
+                    <div class="row">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-header my-2">ท่าว่ายน้ำ</h3>
+                                <p>The card shows the information of each type of swimming posture.</p>
+                                <div class="row my-4">
+                                    <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                                        <img src="image/freestyle.jpg" class="card-img-top" width="50" height="150"
+                                            alt="...">
+                                        <div class="card">
+                                            <h5 class="card-header">Freestyle</h5>
+                                            <div class="card-body">
+                                                <p class="card-text">- Freestyle arm action</p>
+                                                <p class="card-text text-success">Distance</p>
+                                                <p>- 50 meters</p>
+                                                <p>- 100 meters</p>
+                                                <p>- 200 meters</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
+                                        <img src="image/Backstroke.jpg" class="card-img-top" width="50" height="150"
+                                            alt="...">
+                                        <div class="card">
+                                            <h5 class="card-header">Backstroke</h5>
+                                            <div class="card-body">
+                                                <p class="card-text">- Backstroke arm action</p>
+                                                <p class="card-text text-success">Distance</p>
+                                                <p>- 50 meters</p>
+                                                <p>- 100 meters</p>
+                                                <p>- 200 meters</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
+                                        <img src="image/Butterfly.jpg" class="card-img-top" width="50" height="150"
+                                            alt="...">
+                                        <div class="card">
+                                            <h5 class="card-header">Butterfly</h5>
+                                            <div class="card-body">
+                                                <p class="card-text">- Butterfly arm action</p>
+                                                <p class="card-text text-success">Distance</p>
+                                                <p>- 50 meters</p>
+                                                <p>- 100 meters</p>
+                                                <p>- 200 meters</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
+                                        <img src="image/Breaststroke.jpg" class="card-img-top" width="50" height="150"
+                                            alt="...">
+                                        <div class="card">
+                                            <h5 class="card-header">Breaststroke</h5>
+                                            <div class="card-body">
+                                                <p class="card-text">- Breaststroke arm action</p>
+                                                <p class="card-text text-success">Distance</p>
+                                                <p>- 50 meters</p>
+                                                <p>- 100 meters</p>
+                                                <p>- 200 meters</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-12 col-xl-12 mb-4 mb-lg-0 mt-5">
                     <div class="card">
                         <h5 class="card-header">บันทึกผลการแข่งขัน</h5>
@@ -272,22 +308,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-xl-8 mb-4 mb-lg-0 mt-5">
-                    <div class="card">
-                        <h5 class="card-header">ข้อมูลต่างๆของนักกีฬา</h5>
-                        <h9 class="card-header mt-2">กราฟแสดงข้อมูลโดยรวมของนักกีฬา</h9>
-                        <div class="card-body">
-                            <div id="traffic-chart"></div>
-                        </div>
-                    </div>
-                </div>
+            </main>
         </div>
-        <footer class="pt-5 d-flex justify-content-between" align="center">
-            <span>Copyright © 2022 <a href="https://www.facebook.com/ciskku"> CIS IS KKU#3 </a></span>
-        </footer>
-        </main>
     </div>
-    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
