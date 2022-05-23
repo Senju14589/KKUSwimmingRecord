@@ -79,15 +79,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
-        <div class="dropdown">
-            <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                aria-expanded="false">
-                สวัสดีโค้ช, John Doe
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
-            </ul>
-        </div>
+        <div>
+            <a href="newuser.php" class="btn btn-block btn-warning">เพิ่มรายชื่อนักกีฬา</a>
         </div>
     </nav>
     <div class="container-fluid">
@@ -111,7 +104,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="sportuser.php">
+                            <a class="nav-link" href="icuser.php">
                                 <span class="ml-2">ข้อมูลต่างๆของนักกีฬา</span>
                             </a>
                         </li>

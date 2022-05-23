@@ -94,4 +94,19 @@ class DB_con
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------
+
+    //ดึงข้อมูลในdatabaseของ babydetail
+    public function fetchdata2()
+    {
+        $result = mysqli_query($this->dbcon, "SELECT * FROM babydetail");
+        return $result;
+    }
+
+    //เพิ่มข้อมูล babydetail
+    public function insert2($name, $lastname, $nickname, $sexbaby, $birthday, $agebaby, $image)
+    {
+        $result = mysqli_query($this->dbcon, "INSERT INTO listprogram(name, lastname, nickname, sexbaby, birthday, agebaby, image) 
+        VALUES('$name', '$lastname', '$nickname', '$sexbaby', '$birthday', '$agebaby', '$image')");
+        return $result;
+    }
 }
