@@ -103,10 +103,46 @@ class DB_con
     }
 
     //เพิ่มข้อมูล babydetail
-    public function insert2($name, $lastname, $nickname, $sexbaby, $birthday, $agebaby, $image)
+    public function insert2($name, $lastname, $nickname, $sexbaby, $birthday, $agebaby, $path)
     {
-        $result = mysqli_query($this->dbcon, "INSERT INTO listprogram(name, lastname, nickname, sexbaby, birthday, agebaby, image) 
-        VALUES('$name', '$lastname', '$nickname', '$sexbaby', '$birthday', '$agebaby', '$image')");
+        $result = mysqli_query($this->dbcon, "INSERT INTO babydetail(name, lastname, nickname, sexbaby, birthday, agebaby, image) 
+        VALUES('$name', '$lastname', '$nickname', '$sexbaby', '$birthday', '$agebaby', '$path')");
+        return $result;
+    }
+    //ลบข้อมูล babydetail
+    public function delete2($id)
+    {
+        $deleterecord = mysqli_query($this->dbcon, "DELETE FROM babydetail WHERE id = '$id'");
+        return $deleterecord;
+    }
+    //อัพเดตข้อมูลlistprpgram
+    public function update2($id, $name, $lastname, $nickname, $sexbaby, $birthday, $agebaby, $path)
+    {
+        $result = mysqli_query($this->dbcon, "UPDATE babydetail SET 
+             name = '$name',
+             lastname = '$lastname',
+             nickname = '$nickname',
+             sexbaby = '$sexbaby',
+             birthday = '$birthday',
+             agebaby = '$agebaby',
+             image = '$path'
+             WHERE id = '$id'
+         ");
+        return $result;
+    }
+
+    //parentdetail
+    public function fetchdata3()
+    {
+        $result = mysqli_query($this->dbcon, "SELECT * FROM parentdetail");
+        return $result;
+    }
+
+    //เพิ่มข้อมูล parentdetail
+    public function insert3($namefather, $rsfather, $phonefather, $emailfather, $namemother, $rsmother, $phonemother, $emailmother, $address)
+    {
+        $result = mysqli_query($this->dbcon, "INSERT INTO parentdetail(namefather, rsfather, phonefather, emailfather, namemother, rsmother, phonemother, emailmother, address) 
+        VALUES('$namefather', '$rsfather', '$phonefather', '$emailfather', '$namemother', '$rsmother', '$phonemother', '$emailmother', '$address')");
         return $result;
     }
 }

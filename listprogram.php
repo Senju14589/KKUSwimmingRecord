@@ -176,7 +176,7 @@ if (isset($_POST['updatelist'])) {
                                 เพิ่มข้อมูล
                             </button>
                             <hr>
-                            <table id="example" class="table table-bordered table-striped">
+                            <table id="example" class="table table table-hover">
                                 <thead>
                                     <th>ลำดับ</th>
                                     <th>รายการแข่งขัน</th>
