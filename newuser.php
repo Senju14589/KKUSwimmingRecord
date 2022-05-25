@@ -331,8 +331,6 @@ if (isset($_POST['update2'])) {
                                                                                 <option value="แยกกันอยู่">แยกกันอยู่
                                                                                 </option>
                                                                             </select>
-                                                                        </div>
-                                                                        <div class="mb-4">
                                                                             <input type="number" name="phonefather"
                                                                                 class="form-control"
                                                                                 value="<?php echo $row['phonefather']; ?>"
@@ -360,9 +358,6 @@ if (isset($_POST['update2'])) {
                                                                                 <option value="แยกกันอยู่">แยกกันอยู่
                                                                                 </option>
                                                                             </select>
-                                                                        </div>
-
-                                                                        <div class="mb-4">
                                                                             <input type="number" class="form-control"
                                                                                 name="phonemother"
                                                                                 value="<?php echo $row['phonemother']; ?>"

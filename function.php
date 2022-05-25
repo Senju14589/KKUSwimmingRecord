@@ -98,7 +98,7 @@ class DB_con
     //ดึงข้อมูลในdatabaseของ babydetail
     public function fetchdata2()
     {
-        $result = mysqli_query($this->dbcon, "SELECT * FROM babydetail");
+        $result = mysqli_query($this->dbcon, "SELECT * FROM `babydetail`");
         return $result;
     }
 
@@ -143,6 +143,13 @@ class DB_con
     {
         $result = mysqli_query($this->dbcon, "INSERT INTO parentdetail(namefather, rsfather, phonefather, emailfather, namemother, rsmother, phonemother, emailmother, address) 
         VALUES('$namefather', '$rsfather', '$phonefather', '$emailfather', '$namemother', '$rsmother', '$phonemother', '$emailmother', '$address')");
+        return $result;
+    }
+
+    //ดึงสองตารางมาโชว์
+    public function fetchdata4()
+    {
+        $result = mysqli_query($this->dbcon, "SELECT * FROM `babydetail`, parentdetail WHERE babydetail.parent_id = parentdetail.id");
         return $result;
     }
 }
