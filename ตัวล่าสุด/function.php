@@ -103,16 +103,16 @@ class DB_con
     }
 
     //เพิ่มข้อมูล babydetail
-    public function insert2($name, $lastname, $nickname, $sexbaby, $birthday, $agebaby, $path)
+    public function insert2($name, $lastname, $nickname, $sexbaby, $birthday, $agebaby, $path, $parent_id)
     {
-        $result = mysqli_query($this->dbcon, "INSERT INTO babydetail(name, lastname, nickname, sexbaby, birthday, agebaby, image) 
-        VALUES('$name', '$lastname', '$nickname', '$sexbaby', '$birthday', '$agebaby', '$path')");
+        $result = mysqli_query($this->dbcon, "INSERT INTO babydetail(name, lastname, nickname, sexbaby, birthday, agebaby, image, parent_id) 
+        VALUES('$name', '$lastname', '$nickname', '$sexbaby', '$birthday', '$agebaby', '$path', '$parent_id')");
         return $result;
     }
     //ลบข้อมูล babydetail
     public function delete2($id)
     {
-        $deleterecord = mysqli_query($this->dbcon, "DELETE FROM babydetail WHERE id = '$id'");
+        $deleterecord = mysqli_query($this->dbcon, "UPDATE `babydetail` SET `status`= '0' WHERE id = '$id'");
         return $deleterecord;
     }
     //อัพเดตข้อมูลlistprpgram
@@ -146,10 +146,35 @@ class DB_con
         return $result;
     }
 
+    //อัพเดตข้อมูลlistprpgram
+    public function update3($id, $namefather, $rsfather, $phonefather, $emailfather, $namemother, $rsmother, $phonemother, $emailmother, $address)
+    {
+        $result = mysqli_query($this->dbcon, "UPDATE parentdetail SET 
+              namefather = '$namefather',
+              rsfather = '$rsfather',
+              phonefather = '$phonefather',
+              emailfather = '$emailfather',
+              namemother = '$namemother',
+              rsmother = '$rsmother',
+              phonemother = '$phonemother',
+              emailmother = '$emailmother',
+              address = '$address'
+              WHERE id = '$id'
+          ");
+        return $result;
+    }
+
+    //ลบข้อมูล babydetail
+    public function delete3($id)
+    {
+        $deleterecord = mysqli_query($this->dbcon, "DELETE FROM babydetail WHERE id = '$id'");
+        return $deleterecord;
+    }
+
     //ดึงสองตารางมาโชว์
     public function fetchdata4()
     {
-        $result = mysqli_query($this->dbcon, "SELECT * FROM `babydetail`, parentdetail WHERE babydetail.parent_id = parentdetail.id");
+        $result = mysqli_query($this->dbcon, "SELECT * FROM `babydetail`, parentdetail WHERE babydetail.parent_id = parentdetail.id AND babydetail.status = '1'");
         return $result;
     }
 }

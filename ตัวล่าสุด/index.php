@@ -104,7 +104,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="icuser.php">
+                            <a class="nav-link" href="newuser.php">
                                 <span class="ml-2">ข้อมูลต่างๆของนักกีฬา</span>
                             </a>
                         </li>
