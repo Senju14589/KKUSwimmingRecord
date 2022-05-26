@@ -95,7 +95,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="record.php">
-                                <span class="ml-2">บันทึกผลการแข่งขัน</span>
+                                <span class="ml-2">บันทึกผลการซ้อม</span>
                             </a>
                         </li>
                         <li class="nav-item">

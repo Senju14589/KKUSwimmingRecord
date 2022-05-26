@@ -78,12 +78,24 @@ if (isset($_POST['insert2'])) {
     $emailmother = $_POST['emailmother'];
     $address = $_POST['address'];
 
+
     $result = mysqli_query($selecteddata->dbcon, "SELECT MAX(`id`) as maxid FROM `parentdetail` WHERE 1");
     $row = mysqli_fetch_array($result);
     $parent_id = $row['maxid'] + 1;
 
+
+    $study = $_POST['study'];
+    $location = $_POST['location'];
+    $anytime = $_POST['anytime'];
+    $level = $_POST['level'];
+    $pool = $_POST['pool'];
+    $disease = $_POST['disease'];
+    $details = $_POST['details'];
+
+
     $sql = $insertdata->insert2($name, $lastname, $nickname, $sexbaby, $birthday, $agebaby, $path, $parent_id);
-    $sql = $insertdata->insert3($namefather, $rsfather, $phonefather, $emailfather, $namemother, $rsmother, $phonemother, $emailmother, $address);
+    $sql = $insertdata->insert3($namefather, $rsfather, $phonefather, $emailfather, $namemother, $rsmother, $phonemother, $emailmother, $address, $quiry_id);
+    $sql = $insertdata->insert4($study, $location, $anytime, $level, $pool, $disease, $details);
     if ($sql) {
         echo "<script>alert('ข้อมูลบันทึกสำเร็จ!');</script>";
         //echo "<script>window.location.href='record.php'</script>";
@@ -135,8 +147,31 @@ if (isset($_POST['update2'])) {
     $emailmother = $_POST['emailmother'];
     $address = $_POST['address'];
 
-    $sql = $insertdata->update3($id, $namefather, $rsfather, $phonefather, $emailfather, $namemother, $rsmother, $phonemother, $emailmother, $address);
-    $sql = $insertdata->update2($id, $name, $lastname, $nickname, $sexbaby, $birthday, $agebaby, $path);
+
+    $result = mysqli_query($selecteddata->dbcon, "SELECT MAX(`id`) as maxid FROM `parentdetail` WHERE 1");
+    $row = mysqli_fetch_array($result);
+    $parent_id = $row['maxid'] + 1;
+
+
+    $study = $_POST['study'];
+    $location = $_POST['location'];
+    $anytime = $_POST['anytime'];
+    $level = $_POST['level'];
+    $pool = $_POST['pool'];
+    $disease = $_POST['disease'];
+    $details = $_POST['details'];
+
+
+
+    $sql = $updatedata->update2($id, $name, $lastname, $nickname, $sexbaby, $birthday, $agebaby, $path);
+    $sql = $updatedata->update3($id, $namefather, $rsfather, $phonefather, $emailfather, $namemother, $rsmother, $phonemother, $emailmother, $address);
+
+    $result = mysqli_query($selecteddata->dbcon, "SELECT MAX(`id`) as aid FROM `inquiry` WHERE 1");
+    $row = mysqli_fetch_array($result);
+    $quiry_id = $row['aid'] + 1;
+
+    $sql = $updatedata->update4($quiry_id, $study, $location, $anytime, $level, $pool, $disease, $details);
+
     if ($sql) {
         echo "<script>alert('ข้อมูลบันทึกสำเร็จ!');</script>";
         //echo "<script>window.location.href='record.php'</script>";
@@ -223,7 +258,7 @@ if (isset($_POST['update2'])) {
             <a href="index.php" class="btn btn-block btn-warning">หน้าหลัก</a>
         </div>
     </nav>
-    <!---<div class="container-fluid">
+    <div class="container-fluid">
         <div class="row">
             <nav id="sidebar" class="col-md-3 col-lg-2 my-0 d-md-block bg-light sidebar collapse ">
                 <div class="position-sticky">
@@ -252,7 +287,7 @@ if (isset($_POST['update2'])) {
                 </div>
             </nav>
         </div>
-    </div> ---->
+    </div>
     <div class="container-fluid">
         <div class="row">
             <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
@@ -299,7 +334,7 @@ if (isset($_POST['update2'])) {
                                             <td><?php echo $row['sexbaby']; ?></td>
                                             <td><?php echo $row['birthday']; ?></td>
                                             <td><?php echo $row['agebaby']; ?></td>
-                                            <td><button type="button" class="btn btn-success" data-toggle="modal"
+                                            <td><button type="button" class="btn btn-primary" data-toggle="modal"
                                                     data-target="#exampleShow<?php echo $row['id']; ?>">
                                                     ดูข้อมูล
                                                 </button>
@@ -352,6 +387,14 @@ if (isset($_POST['update2'])) {
                                                                                 <?php echo $row['phonefather']; ?><br></small>
                                                                             <small>เบอร์โทรศัพท์คุณแม่ :
                                                                                 <?php echo $row['phonemother']; ?><br></small>
+                                                                            <small>การเรียนว่ายน้ำ :
+                                                                                <?php echo $row['study']; ?><br></small>
+                                                                            <small>ระดับ :
+                                                                                <?php echo $row['level']; ?><br></small>
+                                                                            <small>มีโรคประจำตัวไหม :
+                                                                                <?php echo $row['disease']; ?><br></small>
+                                                                            <small>รายละเอียดอื่นๆ :
+                                                                                <?php echo $row['details']; ?><br></small>
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -363,212 +406,401 @@ if (isset($_POST['update2'])) {
                                                                     </button>
                                                                     <!--- modal แก้ไขข้อมูล -->
                                                                 </p>
-                                                                <div class="modal fade"
-                                                                    id="exampleEdit<?php echo $row['id']; ?>"
-                                                                    tabindex="-1" role="dialog"
-                                                                    aria-labelledby="exampleEdit" aria-hidden="true">
-                                                                    <div class="modal-dialog" role="document">
-                                                                        <div class="modal-content">
-                                                                            <nav class="navbar bg-light">
-                                                                                <div class="container-fluid">
-                                                                                    <a class="navbar-brand" href="#">
-                                                                                        <img src="image/1 KKU new.png"
-                                                                                            alt="" width="30"
-                                                                                            height="24"
-                                                                                            class="d-inline-block align-text-top">
-                                                                                        แก้ไขข้อมูลนักกีฬา
-                                                                                    </a>
-                                                                                </div>
-                                                                            </nav>
-                                                                            <div class="modal-header">
-                                                                                <div class="container row col-lg-12">
-                                                                                    <form action="newuser.php"
-                                                                                        method="post"
-                                                                                        enctype="multipart/form-data">
-                                                                                        <p>
-                                                                                        <h3>แก้ไขข้อมูลนักกีฬา</h3>
-                                                                                        </p>
-                                                                                        <div class="mb-1">
-                                                                                            <input type="hidden"
-                                                                                                name="id"
-                                                                                                value="<?php echo $row['id']; ?>">
-                                                                                            </input>
-                                                                                        </div>
-                                                                                        <div class="input-group mb-3">
-                                                                                            <input type="text"
-                                                                                                class="form-control mt-4"
-                                                                                                name="name"
-                                                                                                value="<?php echo $row['name']; ?>"
-                                                                                                required>
-                                                                                            <input type="text"
-                                                                                                class="form-control mt-4"
-                                                                                                name="lastname"
-                                                                                                value="<?php echo $row['lastname']; ?>"
-                                                                                                required>
-                                                                                        </div>
-                                                                                        <div class="mb-4">
-                                                                                            <input type="text"
-                                                                                                class="form-control mt-4"
-                                                                                                name="nickname"
-                                                                                                value="<?php echo $row['nickname']; ?>"
-                                                                                                required>
-                                                                                        </div>
-                                                                                        <div class="input-group mb-4">
-                                                                                            <select class="form-select"
-                                                                                                name="sexbaby">
-                                                                                                <option <?php if ($row['sexbaby'] == "ชาย") {
-                                                                                                                echo "selected";
-                                                                                                            } ?>
-                                                                                                    value="ชาย">
-                                                                                                    ชาย
-                                                                                                </option>
-                                                                                                <option <?php if ($row['sexbaby'] == "หญิง") {
-                                                                                                                echo "selected";
-                                                                                                            } ?>
-                                                                                                    value="หญิง">
-                                                                                                    หญฺิง
-                                                                                                </option>
-                                                                                            </select>
-                                                                                            <input type="number"
-                                                                                                name="agebaby"
-                                                                                                class="form-control"
-                                                                                                value="<?php echo $row['agebaby']; ?>"
-                                                                                                required>
-                                                                                        </div>
-                                                                                        <div class="mb-4">
-                                                                                            <label
-                                                                                                for="birthday">วันเกิด</label>
-                                                                                            <input type="date"
-                                                                                                class="form-control"
-                                                                                                name="birthday"
-                                                                                                value="<?php echo $row['birthday']; ?>"
-                                                                                                required>
-                                                                                        </div>
-                                                                                        <div class="mb-4">
-                                                                                            <label
-                                                                                                for="image">รูปประจำตัว</label>
-                                                                                            <input type="file"
-                                                                                                name="file" id="file"
-                                                                                                class="form-control"
-                                                                                                required>
-                                                                                        </div>
-                                                                                        <div class="mb-4">
-                                                                                            <h3>แก้ไขข้อมูลผู้ปกครอง
-                                                                                            </h3>
-                                                                                        </div>
-                                                                                        <div class="mb-4">
-                                                                                            <input type="hidden"
-                                                                                                name="id"
-                                                                                                value="<?php echo $row['id']; ?>">
-                                                                                            </input>
-                                                                                        </div>
-                                                                                        <div class="mb-3">
-                                                                                            <input type="text"
-                                                                                                class="form-control"
-                                                                                                name="namefather"
-                                                                                                value="<?php echo $row['namefather']; ?>"
-                                                                                                required>
-                                                                                        </div>
-                                                                                        <div class="input-group mb-4">
-                                                                                            <select class="form-select"
-                                                                                                name="rsfather">
-                                                                                                <option <?php if ($row['rsfather'] == "ยังอยู่ด้วยกัน") {
-                                                                                                                echo "selected";
-                                                                                                            } ?>
-                                                                                                    value="ยังอยู่ด้วยกัน">
-                                                                                                    ยังอยู่ด้วยกัน
-                                                                                                </option>
-                                                                                                <option <?php if ($row['rsfather'] == "หย่าร้าง") {
-                                                                                                                echo "selected";
-                                                                                                            } ?>
-                                                                                                    value="หย่าร้าง">
-                                                                                                    หย่าร้าง
-                                                                                                </option>
-                                                                                                <option <?php if ($row['rsfather'] == "แยกกันอยู่") {
-                                                                                                                echo "selected";
-                                                                                                            } ?>
-                                                                                                    value="แยกกันอยู่">
-                                                                                                    แยกกันอยู่
-                                                                                                </option>
-                                                                                            </select>
-                                                                                            <input type="text"
-                                                                                                name="phonefather"
-                                                                                                class="form-control"
-                                                                                                value="<?php echo $row['phonefather']; ?>"
-                                                                                                required>
-                                                                                        </div>
-                                                                                        <div class="mb-4">
-                                                                                            <input type="email"
-                                                                                                class="form-control"
-                                                                                                name="emailfather"
-                                                                                                value="<?php echo $row['emailfather']; ?>"
-                                                                                                required>
-                                                                                        </div>
-                                                                                        <div class="mb-4">
-                                                                                            <input type="text"
-                                                                                                name="namemother"
-                                                                                                class="form-control"
-                                                                                                value="<?php echo $row['namemother']; ?>"
-                                                                                                required>
-                                                                                        </div>
-                                                                                        <div class="input-group mb-4">
-                                                                                            <select class="form-select"
-                                                                                                name="rsmother">
-                                                                                                <option <?php if ($row['rsmother'] == "ยังอยู่ด้วยกัน") {
-                                                                                                                echo "selected";
-                                                                                                            } ?>
-                                                                                                    value="ยังอยู่ด้วยกัน">
-                                                                                                    ยังอยู่ด้วยกัน
-                                                                                                </option>
-                                                                                                <option <?php if ($row['rsmother'] == "หย่าร้าง") {
-                                                                                                                echo "selected";
-                                                                                                            } ?>
-                                                                                                    value="หย่าร้าง">
-                                                                                                    หย่าร้าง
-                                                                                                </option>
-                                                                                                <option <?php if ($row['rsmother'] == "แยกกันอยู่") {
-                                                                                                                echo "selected";
-                                                                                                            } ?>
-                                                                                                    value="แยกกันอยู่">
-                                                                                                    แยกกันอยู่
-                                                                                                </option>
-                                                                                            </select>
-                                                                                            <input type="number"
-                                                                                                class="form-control"
-                                                                                                name="phonemother"
-                                                                                                value="<?php echo $row['phonemother']; ?>"
-                                                                                                required>
-                                                                                        </div>
-                                                                                        <div class="mb-4">
-                                                                                            <input type="email"
-                                                                                                class="form-control"
-                                                                                                name="emailmother"
-                                                                                                value="<?php echo $row['emailmother']; ?>"
-                                                                                                required>
-                                                                                        </div>
-                                                                                        <div class="mb-4">
-                                                                                            <input type="text"
-                                                                                                class="form-control"
-                                                                                                name="address"
-                                                                                                value="<?php echo $row['address']; ?>"
-                                                                                                required>
-                                                                                        </div>
-                                                                                        <button type="submit"
-                                                                                            name="update2"
-                                                                                            class="btn btn-success">เพิ่มข้อมูล</button>
-                                                                                        <button type="button"
-                                                                                            class="btn btn-danger"
-                                                                                            data-dismiss="modal">ยกเลิก!</button>
+                                                                <div class="container">
+                                                                    <div class="modal fade"
+                                                                        id="exampleEdit<?php echo $row['id']; ?>"
+                                                                        tabindex="-1" role="dialog"
+                                                                        aria-labelledby="exampleEdit"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog modal-lg"
+                                                                            role="document">
+                                                                            <div class="modal-content">
+                                                                                <nav class="navbar bg-light">
+                                                                                    <div class="container-fluid">
+                                                                                        <a class="navbar-brand"
+                                                                                            href="#">
+                                                                                            <img src="image/1 KKU new.png"
+                                                                                                alt="" width="30"
+                                                                                                height="24"
+                                                                                                class="d-inline-block align-text-top">
+                                                                                            แก้ไขข้อมูลนักกีฬา
+                                                                                        </a>
+                                                                                    </div>
+                                                                                </nav>
+                                                                                <div class="modal-header">
+                                                                                    <div
+                                                                                        class="container row col-lg-12">
+                                                                                        <form action="newuser.php"
+                                                                                            method="post"
+                                                                                            enctype="multipart/form-data">
+                                                                                            <div class="row">
+                                                                                                <div
+                                                                                                    class="col-12 col-md-12 col-lg-6 mb-8 mb-lg-2">
+                                                                                                    <p>
+                                                                                                    <h3>แก้ไขข้อมูลนักกีฬา
+                                                                                                    </h3>
+                                                                                                    </p>
+                                                                                                    <div class="mb-1">
+                                                                                                        <input
+                                                                                                            type="hidden"
+                                                                                                            name="id"
+                                                                                                            value="<?php echo $row['id']; ?>">
+                                                                                                        </input>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                        class="input-group mb-3">
+                                                                                                        <input
+                                                                                                            type="text"
+                                                                                                            class="form-control mt-4"
+                                                                                                            name="name"
+                                                                                                            value="<?php echo $row['name']; ?>"
+                                                                                                            required>
+                                                                                                        <input
+                                                                                                            type="text"
+                                                                                                            class="form-control mt-4"
+                                                                                                            name="lastname"
+                                                                                                            value="<?php echo $row['lastname']; ?>"
+                                                                                                            required>
+                                                                                                    </div>
+                                                                                                    <div class="mb-4">
+                                                                                                        <input
+                                                                                                            type="text"
+                                                                                                            class="form-control mt-4"
+                                                                                                            name="nickname"
+                                                                                                            value="<?php echo $row['nickname']; ?>"
+                                                                                                            required>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                        class="input-group mb-4">
+                                                                                                        <select
+                                                                                                            class="form-select"
+                                                                                                            name="sexbaby">
+                                                                                                            <option
+                                                                                                                <?php if ($row['sexbaby'] == "ชาย") {
+                                                                                                                            echo "selected";
+                                                                                                                        } ?>
+                                                                                                                value="ชาย">
+                                                                                                                ชาย
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                <?php if ($row['sexbaby'] == "หญิง") {
+                                                                                                                            echo "selected";
+                                                                                                                        } ?>
+                                                                                                                value="หญิง">
+                                                                                                                หญฺิง
+                                                                                                            </option>
+                                                                                                        </select>
+                                                                                                        <input
+                                                                                                            type="number"
+                                                                                                            name="agebaby"
+                                                                                                            class="form-control"
+                                                                                                            value="<?php echo $row['agebaby']; ?>"
+                                                                                                            required>
+                                                                                                    </div>
+                                                                                                    <div class="mb-4">
+                                                                                                        <label
+                                                                                                            for="birthday">วันเกิด</label>
+                                                                                                        <input
+                                                                                                            type="date"
+                                                                                                            class="form-control"
+                                                                                                            name="birthday"
+                                                                                                            value="<?php echo $row['birthday']; ?>"
+                                                                                                            required>
+                                                                                                    </div>
+                                                                                                    <div class="mb-4">
+                                                                                                        <label
+                                                                                                            for="image">รูปประจำตัว</label>
+                                                                                                        <input
+                                                                                                            type="file"
+                                                                                                            name="file"
+                                                                                                            id="file"
+                                                                                                            class="form-control"
+                                                                                                            value="<?php echo $row['image']; ?>"
+                                                                                                            <p>
+                                                                                                        <img src="<?php echo $row['image']; ?>"
+                                                                                                            height="100"
+                                                                                                            width="100"
+                                                                                                            alt="">
+                                                                                                        </p>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div
+                                                                                                    class="col-12 col-md-12 col-lg-6 mb-8 mb-lg-4">
+                                                                                                    <div class="mb-4">
+                                                                                                        <h3>แก้ไขข้อมูลผู้ปกครอง
+                                                                                                        </h3>
+                                                                                                    </div>
+                                                                                                    <div class="mb-4">
+                                                                                                        <input
+                                                                                                            type="hidden"
+                                                                                                            name="id"
+                                                                                                            value="<?php echo $row['id']; ?>">
+                                                                                                        </input>
+                                                                                                    </div>
+                                                                                                    <div class="mb-3">
+                                                                                                        <input
+                                                                                                            type="text"
+                                                                                                            class="form-control"
+                                                                                                            name="namefather"
+                                                                                                            value="<?php echo $row['namefather']; ?>"
+                                                                                                            required>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                        class="input-group mb-4">
+                                                                                                        <select
+                                                                                                            class="form-select"
+                                                                                                            name="rsfather">
+                                                                                                            <option
+                                                                                                                <?php if ($row['rsfather'] == "ยังอยู่ด้วยกัน") {
+                                                                                                                            echo "selected";
+                                                                                                                        } ?>
+                                                                                                                value="ยังอยู่ด้วยกัน">
+                                                                                                                ยังอยู่ด้วยกัน
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                <?php if ($row['rsfather'] == "หย่าร้าง") {
+                                                                                                                            echo "selected";
+                                                                                                                        } ?>
+                                                                                                                value="หย่าร้าง">
+                                                                                                                หย่าร้าง
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                <?php if ($row['rsfather'] == "แยกกันอยู่") {
+                                                                                                                            echo "selected";
+                                                                                                                        } ?>
+                                                                                                                value="แยกกันอยู่">
+                                                                                                                แยกกันอยู่
+                                                                                                            </option>
+                                                                                                        </select>
+                                                                                                        <input
+                                                                                                            type="text"
+                                                                                                            name="phonefather"
+                                                                                                            class="form-control"
+                                                                                                            value="<?php echo $row['phonefather']; ?>"
+                                                                                                            required>
+                                                                                                    </div>
+                                                                                                    <div class="mb-4">
+                                                                                                        <input
+                                                                                                            type="email"
+                                                                                                            class="form-control"
+                                                                                                            name="emailfather"
+                                                                                                            value="<?php echo $row['emailfather']; ?>"
+                                                                                                            required>
+                                                                                                    </div>
+                                                                                                    <div class="mb-4">
+                                                                                                        <input
+                                                                                                            type="text"
+                                                                                                            name="namemother"
+                                                                                                            class="form-control"
+                                                                                                            value="<?php echo $row['namemother']; ?>"
+                                                                                                            required>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                        class="input-group mb-4">
+                                                                                                        <select
+                                                                                                            class="form-select"
+                                                                                                            name="rsmother">
+                                                                                                            <option
+                                                                                                                <?php if ($row['rsmother'] == "ยังอยู่ด้วยกัน") {
+                                                                                                                            echo "selected";
+                                                                                                                        } ?>
+                                                                                                                value="ยังอยู่ด้วยกัน">
+                                                                                                                ยังอยู่ด้วยกัน
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                <?php if ($row['rsmother'] == "หย่าร้าง") {
+                                                                                                                            echo "selected";
+                                                                                                                        } ?>
+                                                                                                                value="หย่าร้าง">
+                                                                                                                หย่าร้าง
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                <?php if ($row['rsmother'] == "แยกกันอยู่") {
+                                                                                                                            echo "selected";
+                                                                                                                        } ?>
+                                                                                                                value="แยกกันอยู่">
+                                                                                                                แยกกันอยู่
+                                                                                                            </option>
+                                                                                                        </select>
+                                                                                                        <input
+                                                                                                            type="number"
+                                                                                                            class="form-control"
+                                                                                                            name="phonemother"
+                                                                                                            value="<?php echo $row['phonemother']; ?>"
+                                                                                                            required>
+                                                                                                    </div>
+                                                                                                    <div class="mb-4">
+                                                                                                        <input
+                                                                                                            type="email"
+                                                                                                            class="form-control"
+                                                                                                            name="emailmother"
+                                                                                                            value="<?php echo $row['emailmother']; ?>"
+                                                                                                            required>
+                                                                                                    </div>
+                                                                                                    <div class="mb-4">
+                                                                                                        <input
+                                                                                                            type="text"
+                                                                                                            class="form-control"
+                                                                                                            name="address"
+                                                                                                            value="<?php echo $row['address']; ?>"
+                                                                                                            required>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-12">
+                                                                                                    <p>
+                                                                                                    <h3>ข้อซักถามเพิ่มเติม
+                                                                                                    </h3>
+                                                                                                    </p>
+                                                                                                    <p>
+                                                                                                        1.น้องเคยเรียนว่ายน้ำมาก่อนหรือไม่
+                                                                                                        ?
+                                                                                                        <input
+                                                                                                            type="radio"
+                                                                                                            name="study"
+                                                                                                            value="YES">
+                                                                                                        Y
+                                                                                                        <input
+                                                                                                            type="radio"
+                                                                                                            name="study"
+                                                                                                            value="NO">
+                                                                                                        N
+                                                                                                        <br>
+                                                                                                    <div
+                                                                                                        class="input-group">
+                                                                                                        <span
+                                                                                                            class="input-group-text">สถานที่</span>
+                                                                                                        <input
+                                                                                                            type="text"
+                                                                                                            name="location"
+                                                                                                            class="form-control"
+                                                                                                            value="<?php echo $row['location']; ?>">
+                                                                                                        <span
+                                                                                                            class="input-group-text">เมื่อใด</span>
+                                                                                                        <input
+                                                                                                            type="date"
+                                                                                                            name="anytime"
+                                                                                                            class="form-control"
+                                                                                                            value="<?php echo $row['anytime']; ?>">
+
+
+                                                                                                        <select
+                                                                                                            class="form-select"
+                                                                                                            name="level">
+                                                                                                            <option
+                                                                                                                <?php if ($row['level'] == "learn to swim") {
+                                                                                                                            echo "selected";
+                                                                                                                        } ?>
+                                                                                                                value="learn to swim">
+                                                                                                                learn to
+                                                                                                                swim
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                <?php if ($row['level'] == "aeg group swimming") {
+                                                                                                                            echo "selected";
+                                                                                                                        } ?>
+                                                                                                                value="aeg group swimming">
+                                                                                                                aeg
+                                                                                                                group
+                                                                                                                swimming
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                <?php if ($row['level'] == "senior swimming") {
+                                                                                                                            echo "selected";
+                                                                                                                        } ?>
+                                                                                                                value="senior swimming">
+                                                                                                                senior
+                                                                                                                swimming
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                <?php if ($row['level'] == "elite level swimming") {
+                                                                                                                            echo "selected";
+                                                                                                                        } ?>
+                                                                                                                value="elite level swimming">
+                                                                                                                elite
+                                                                                                                level
+                                                                                                                swimming
+                                                                                                            </option>
+                                                                                                        </select>
+                                                                                                    </div>
+                                                                                                    </p>
+                                                                                                    <p>
+                                                                                                        2.น้องคุ้นเคยกับการเล่นน้ำในอ่างน้ำ/สระน้ำในระดับใด
+                                                                                                        <br>
+                                                                                                        <input
+                                                                                                            type="radio"
+                                                                                                            name="pool"
+                                                                                                            value="กลัวมาก">
+                                                                                                        กลัวมาก
+                                                                                                        <br>
+                                                                                                        <input
+                                                                                                            type="radio"
+                                                                                                            name="pool"
+                                                                                                            value="ค่อนข้างกลัวน้ำ">
+                                                                                                        ค่อยข้างกลัวน้ำ
+                                                                                                        <br>
+                                                                                                        <input
+                                                                                                            type="radio"
+                                                                                                            name="pool"
+                                                                                                            value="ปานกลาง">
+                                                                                                        ปานกลาง
+                                                                                                        <br>
+                                                                                                        <input
+                                                                                                            type="radio"
+                                                                                                            name="pool"
+                                                                                                            value="คุ้นเคย">
+                                                                                                        คุ้นเคย
+                                                                                                        <br>
+                                                                                                        <input
+                                                                                                            type="radio"
+                                                                                                            name="pool"
+                                                                                                            value="ชอบน้ำมาก">
+                                                                                                        ชอบน้ำมาก
+                                                                                                        <br>
+                                                                                                    </p>
+                                                                                                    <p>
+                                                                                                        3.น้องมีโรคประจำตัวหรือไม่
+                                                                                                        <input
+                                                                                                            type="radio"
+                                                                                                            name="disease"
+                                                                                                            value="YES">
+                                                                                                        Y
+                                                                                                        <input
+                                                                                                            type="radio"
+                                                                                                            name="disease"
+                                                                                                            value="NO">
+                                                                                                        N
+                                                                                                        <br><br>
+                                                                                                        รายละเอียด
+                                                                                                    <div
+                                                                                                        class="input-group">
+                                                                                                        <textarea
+                                                                                                            class="form-control"
+                                                                                                            name="details"
+                                                                                                            aria-label="With textarea"><?php echo $row['details']; ?>
+                                                                                                        </textarea>
+                                                                                                    </div>
+                                                                                                    </p>
+                                                                                                    <button
+                                                                                                        type="submit"
+                                                                                                        name="update2"
+                                                                                                        class="btn btn-success">เพิ่มข้อมูล</button>
+                                                                                                    <button
+                                                                                                        type="button"
+                                                                                                        class="btn btn-danger"
+                                                                                                        data-dismiss="modal">ยกเลิก!</button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                    </div>
                                                                                     </form>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
                                             </td>
                                             <td><a href="newuser.php?del=<?php echo $row['id']; ?>"
                                                     class="btn btn-danger" onclick="Del(this.href);return false;">ลบ</a>
@@ -583,107 +815,162 @@ if (isset($_POST['update2'])) {
                 </div>
             </main>
         </div>
+    </div>
 
-        <!--- modal เพิ่มข้อมูล -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="container row col-lg-12">
-                            <nav class="navbar bg-light">
-                                <div class="container-fluid">
-                                    <a class="navbar-brand" href="#">
-                                        <img src="image/1 KKU new.png" alt="" width="30" height="24"
-                                            class="d-inline-block align-text-top">
-                                        ใบสมัครเรียน
-                                    </a>
+    <!--- modal เพิ่มข้อมูล -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="container row col-lg-20">
+                        <nav class="navbar bg-light">
+                            <div class="container-fluid">
+                                <a class="navbar-brand" href="#">
+                                    <img src="image/1 KKU new.png" alt="" width="30" height="24"
+                                        class="d-inline-block align-text-top">
+                                    ใบสมัครเรียน
+                                </a>
+                            </div>
+                        </nav>
+                        <form action="newuser.php" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-12 col-md-12 col-lg-6 mb-8 mb-lg-2">
+                                    <p>
+                                    <h3>กรอกข้อมูลนักกีฬา</h3>
+                                    </p>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control mt-4" name="name" placeholder="ชื่อจริง"
+                                            required>
+                                        <input type="text" class="form-control mt-4" name="lastname"
+                                            placeholder="นามสกุล" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control mt-4" name="nickname"
+                                            placeholder="ชื่อเล่น" required>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <select class="form-select" name="sexbaby">
+                                            <option selected>เพศ</option>
+                                            <option value="ชาย">ชาย</option>
+                                            <option value="หญิง">หญิง</option>
+                                        </select>
+                                        <input type="number" name="agebaby" class="form-control" placeholder="อายุ"
+                                            required>
+                                    </div>
+                                    <div class="mb-3" <label for="image">รูปประจำตัว</label>
+                                        <input type="file" name="file" id="file" class="form-control" required>
+                                    </div>
+                                    <div class="mb-3" <label for="birthday">วันเกิด</label>
+                                        <input type="date" class="form-control" name="birthday" placeholder="วันเกิด"
+                                            required>
+                                    </div>
                                 </div>
-                            </nav>
-                            <form action="newuser.php" method="post" enctype="multipart/form-data">
-                                <p>
-                                <h3>กรอกข้อมูลนักกีฬา</h3>
-                                </p>
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control mt-4" name="name" placeholder="ชื่อจริง"
-                                        required>
-                                    <input type="text" class="form-control mt-4" name="lastname" placeholder="นามสกุล"
-                                        required>
-                                </div>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control mt-4" name="nickname" placeholder="ชื่อเล่น"
-                                        required>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <select class="form-select" name="sexbaby">
-                                        <option selected>เพศ</option>
-                                        <option value="ชาย">ชาย</option>
-                                        <option value="หญิง">หญิง</option>
-                                    </select>
-                                    <input type="number" name="agebaby" class="form-control" placeholder="อายุ"
-                                        required>
-                                </div>
-                                <div class="mb-3" <label for="image">รูปประจำตัว</label>
-                                    <input type="file" name="file" id="file" class="form-control" required>
-                                </div>
-                                <div class="mb-3" <label for="birthday">วันเกิด</label>
-                                    <input type="date" class="form-control" name="birthday" placeholder="วันเกิด"
-                                        required>
-                                </div>
-                                <div class="mb-4">
+                                <div class="col-12 col-md-12 col-lg-6 mb-8 mb-lg-4">
+                                    <p>
                                     <h3>กรอกข้อมูลผู้ปกครอง</h3>
+                                    </p>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" name="namefather"
+                                            placeholder="ชื่อ-สกุล บิดา" required>
+                                    </div>
+                                    <div class="input-group mb-4">
+                                        <select class="form-select" name="rsfather">
+                                            <option selected>ความสัมพันธ์</option>
+                                            <option value="ยังอยู่ด้วยกัน">ยังอยู่ด้วยกัน</option>
+                                            <option value="หย่าร้าง">หย่าร้าง</option>
+                                            <option value="แยกกันอยู่">แยกกันอยู่</option>
+                                        </select>
+                                        <input type="text" name="phonefather" class="form-control"
+                                            placeholder="เบอร์โทรศัพท์" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <input type="email" class="form-control" name="emailfather" placeholder="E-mail"
+                                            required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <input type="text" name="namemother" class="form-control"
+                                            placeholder="ชื่อ-สกุล มารดา" required>
+                                    </div>
+                                    <div class="input-group mb-4">
+                                        <select class="form-select" name="rsmother">
+                                            <option selected>ความสัมพันธ์</option>
+                                            <option value="ยังอยู่ด้วยกัน">ยังอยู่ด้วยกัน</option>
+                                            <option value="หย่าร้าง">หย่าร้าง</option>
+                                            <option value="แยกกันอยู่">แยกกันอยู่</option>
+                                        </select>
+                                        <input type="text" class="form-control" name="phonemother"
+                                            placeholder="เบอร์โทรศัพท์" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <input type="email" class="form-control" name="emailmother" placeholder="E-mail"
+                                            required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <input type="text" class="form-control" name="address" placeholder="ที่อยู่"
+                                            required>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" name="namefather"
-                                        placeholder="ชื่อ-สกุล บิดา" required>
+                                <div class="center">
+                                    <div class="col-12">
+                                        <p>
+                                        <h3>ข้อซักถามเพิ่มเติม</h3>
+                                        </p>
+                                        <p>
+                                            1.น้องเคยเรียนว่ายน้ำมาก่อนหรือไม่ ?
+                                            <input type="radio" name="study" required value="YES"> Y
+                                            <input type="radio" name="study" required value="NO"> N
+                                            <br>
+                                        <div class="input-group">
+                                            <span class="input-group-text">สถานที่</span>
+                                            <input type="text" name="location" class="form-control">
+                                            <span class="input-group-text">เมื่อใด</span>
+                                            <input type="date" name="anytime" class="form-control">
+                                            <select class="form-select" name="level">
+                                                <option selected>ระดับการว่ายน้ำ</option>
+                                                <option value="learn to swim">learn to swim</option>
+                                                <option value="aeg group swimming">aeg group swimming</option>
+                                                <option value="senior swimming">senior swimming</option>
+                                                <option value="elite level swimming">elite level swimming</option>
+                                            </select>
+                                        </div>
+                                        </p>
+                                        <p>
+                                            2.น้องคุ้นเคยกับการเล่นน้ำในอ่างน้ำ/สระน้ำในระดับใด <br>
+                                            <input type="radio" name="pool" required value="กลัวมาก"> กลัวมาก
+                                            <br>
+                                            <input type="radio" name="pool" required value="ค่อนข้างกลัวน้ำ">
+                                            ค่อยข้างกลัวน้ำ
+                                            <br>
+                                            <input type="radio" name="pool" required value="ปานกลาง"> ปานกลาง
+                                            <br>
+                                            <input type="radio" name="pool" required value="คุ้นเคย"> คุ้นเคย
+                                            <br>
+                                            <input type="radio" name="pool" required value="ชอบน้ำมาก"> ชอบน้ำมาก
+                                            <br>
+                                        </p>
+                                        <p>
+                                            3.น้องมีโรคประจำตัวหรือไม่
+                                            <input type="radio" name="disease" required value="YES"> Y
+                                            <input type="radio" name="disease" required value="NO"> N
+                                            <br><br>
+                                            รายละเอียด
+                                        <div class="input-group">
+                                            <textarea class="form-control" name="details"
+                                                aria-label="With textarea"></textarea>
+                                        </div>
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="input-group mb-4">
-                                    <select class="form-select" name="rsfather">
-                                        <option selected>ความสัมพันธ์</option>
-                                        <option value="ยังอยู่ด้วยกัน">ยังอยู่ด้วยกัน</option>
-                                        <option value="หย่าร้าง">หย่าร้าง</option>
-                                        <option value="แยกกันอยู่">แยกกันอยู่</option>
-                                    </select>
-                                    <input type="text" name="phonefather" class="form-control"
-                                        placeholder="เบอร์โทรศัพท์" required>
-                                </div>
-                                <div class="mb-4">
-                                    <input type="email" class="form-control" name="emailfather" placeholder="E-mail"
-                                        required>
-                                </div>
-                                <div class="mb-4">
-                                    <input type="text" name="namemother" class="form-control"
-                                        placeholder="ชื่อ-สกุล มารดา" required>
-                                </div>
-                                <div class="input-group mb-4">
-                                    <select class="form-select" name="rsmother">
-                                        <option selected>ความสัมพันธ์</option>
-                                        <option value="ยังอยู่ด้วยกัน">ยังอยู่ด้วยกัน</option>
-                                        <option value="หย่าร้าง">หย่าร้าง</option>
-                                        <option value="แยกกันอยู่">แยกกันอยู่</option>
-                                    </select>
-                                    <input type="text" class="form-control" name="phonemother"
-                                        placeholder="เบอร์โทรศัพท์" required>
-                                </div>
-                                <div class="mb-4">
-                                    <input type="email" class="form-control" name="emailmother" placeholder="E-mail"
-                                        required>
-                                </div>
-                                <div class="mb-4">
-                                    <input type="text" class="form-control" name="address" placeholder="ที่อยู่"
-                                        required>
-                                </div>
-                                <button type="submit" name="insert2" class="btn btn-success">เพิ่มข้อมูล</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก!</button>
-                            </form>
-                        </div>
+                            </div>
+                            <button type="submit" name="insert2" class="btn btn-success">เพิ่มข้อมูล</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก!</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
+    </div>
 
 
     </div>
