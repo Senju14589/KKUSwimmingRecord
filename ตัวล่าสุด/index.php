@@ -249,7 +249,6 @@
                                             <td><?php echo $row['style']; ?></td>
                                         </tr>
                                         <?php
-
                                         }
                                         ?>
                                     </tbody>

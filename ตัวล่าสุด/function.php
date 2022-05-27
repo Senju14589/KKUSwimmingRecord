@@ -34,10 +34,10 @@ class DB_con
 
 
     //เพิ่มข้อมูล record
-    public function insert($list, $age, $sex, $statistics, $number, $style)
+    public function insert($day, $poise, $distance, $timer)
     {
-        $result = mysqli_query($this->dbcon, "INSERT INTO record(list, age, sex, statistics, number, style) 
-        VALUES('$list', '$age', '$sex', '$statistics', '$number', '$style')");
+        $result = mysqli_query($this->dbcon, "INSERT INTO record(day, poise, distance, timer) 
+        VALUES('$day', '$poise', '$distance', '$timer')");
         return $result;
     }
 
@@ -146,7 +146,7 @@ class DB_con
         return $result;
     }
 
-    //อัพเดตข้อมูลlistprpgram
+    //อัพเดตข้อมูล parentdetail
     public function update3($id, $namefather, $rsfather, $phonefather, $emailfather, $namemother, $rsmother, $phonemother, $emailmother, $address)
     {
         $result = mysqli_query($this->dbcon, "UPDATE parentdetail SET 
@@ -163,7 +163,6 @@ class DB_con
           ");
         return $result;
     }
-
     //ลบข้อมูล babydetail
     public function delete3($id)
     {
@@ -171,14 +170,18 @@ class DB_con
         return $deleterecord;
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     //ดึงสองตารางมาโชว์
     public function fetchdata4()
     {
-        $result = mysqli_query($this->dbcon, "SELECT * FROM `babydetail`, parentdetail, inquiry WHERE babydetail.parent_id = parentdetail.quiry_id = inquiry.quiry_id  AND babydetail.status = '1'");
+        $result = mysqli_query($this->dbcon, "SELECT * FROM `babydetail`, parentdetail, inquiry 
+        WHERE babydetail.parent_id = parentdetail.quiry_id = inquiry.quiry_id  AND babydetail.status = '1'");
         return $result;
     }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //parentdetail
+    //โชว์ข้อมูล inquiry
     public function fetchdata5()
     {
         $result = mysqli_query($this->dbcon, "SELECT * FROM inquiry");
@@ -188,12 +191,12 @@ class DB_con
     //เพิ่มข้อมูล inquiry
     public function insert4($study, $location, $anytime, $level, $pool, $disease, $details)
     {
-        $result = mysqli_query($this->dbcon, "INSERT INTO inquiryl(study, location, anytime, level, pool, disease, details) 
+        $result = mysqli_query($this->dbcon, "INSERT INTO inquiry(study, location, anytime, level, pool, disease, details) 
         VALUES('$study', '$location', '$anytime', '$level', '$pool', '$disease', '$details')");
         return $result;
     }
 
-    //เพิ่มข้อมูลของ inquiry
+    //อัพเดตข้อมูลของ inquiry
     public function update4($quiry_id, $study, $location, $anytime, $level, $pool, $disease, $details)
     {
         $result = mysqli_query($this->dbcon, "UPDATE inquiry SET 
@@ -208,4 +211,6 @@ class DB_con
          ");
         return $result;
     }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

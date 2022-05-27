@@ -92,10 +92,14 @@ if (isset($_POST['insert2'])) {
     $disease = $_POST['disease'];
     $details = $_POST['details'];
 
+    $result = mysqli_query($selecteddata->dbcon, "SELECT MAX(`id`) as aid FROM `parentdetail` WHERE 1");
+    $row = mysqli_fetch_array($result);
+    $quiry_id = $row['aid'] + 1;
 
     $sql = $insertdata->insert2($name, $lastname, $nickname, $sexbaby, $birthday, $agebaby, $path, $parent_id);
     $sql = $insertdata->insert3($namefather, $rsfather, $phonefather, $emailfather, $namemother, $rsmother, $phonemother, $emailmother, $address, $quiry_id);
     $sql = $insertdata->insert4($study, $location, $anytime, $level, $pool, $disease, $details);
+
     if ($sql) {
         echo "<script>alert('ข้อมูลบันทึกสำเร็จ!');</script>";
         //echo "<script>window.location.href='record.php'</script>";
@@ -153,6 +157,7 @@ if (isset($_POST['update2'])) {
     $parent_id = $row['maxid'] + 1;
 
 
+    $quiry_id = $_POST['id'];
     $study = $_POST['study'];
     $location = $_POST['location'];
     $anytime = $_POST['anytime'];
@@ -162,14 +167,8 @@ if (isset($_POST['update2'])) {
     $details = $_POST['details'];
 
 
-
     $sql = $updatedata->update2($id, $name, $lastname, $nickname, $sexbaby, $birthday, $agebaby, $path);
     $sql = $updatedata->update3($id, $namefather, $rsfather, $phonefather, $emailfather, $namemother, $rsmother, $phonemother, $emailmother, $address);
-
-    $result = mysqli_query($selecteddata->dbcon, "SELECT MAX(`id`) as aid FROM `inquiry` WHERE 1");
-    $row = mysqli_fetch_array($result);
-    $quiry_id = $row['aid'] + 1;
-
     $sql = $updatedata->update4($quiry_id, $study, $location, $anytime, $level, $pool, $disease, $details);
 
     if ($sql) {
@@ -270,7 +269,7 @@ if (isset($_POST['update2'])) {
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="record.php">
-                                <span class="ml-2">บันทึกผลการแข่งขัน</span>
+                                <span class="ml-2">บันทึกผลการซ้อม</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -387,9 +386,9 @@ if (isset($_POST['update2'])) {
                                                                                 <?php echo $row['phonefather']; ?><br></small>
                                                                             <small>เบอร์โทรศัพท์คุณแม่ :
                                                                                 <?php echo $row['phonemother']; ?><br></small>
-                                                                            <small>การเรียนว่ายน้ำ :
+                                                                            <small>เคยเรียนว่ายน้ำมาบ้างไหม? :
                                                                                 <?php echo $row['study']; ?><br></small>
-                                                                            <small>ระดับ :
+                                                                            <small>ระดับในการว่ายน้ำ :
                                                                                 <?php echo $row['level']; ?><br></small>
                                                                             <small>มีโรคประจำตัวไหม :
                                                                                 <?php echo $row['disease']; ?><br></small>
@@ -651,18 +650,31 @@ if (isset($_POST['update2'])) {
                                                                                                     <h3>ข้อซักถามเพิ่มเติม
                                                                                                     </h3>
                                                                                                     </p>
+                                                                                                    <div class="mb-4">
+                                                                                                        <input
+                                                                                                            type="hidden"
+                                                                                                            name="id"
+                                                                                                            value="<?php echo $row['quiry_id']; ?>">
+                                                                                                        </input>
+                                                                                                    </div>
                                                                                                     <p>
                                                                                                         1.น้องเคยเรียนว่ายน้ำมาก่อนหรือไม่
                                                                                                         ?
                                                                                                         <input
                                                                                                             type="radio"
                                                                                                             name="study"
-                                                                                                            value="YES">
+                                                                                                            value="YES"
+                                                                                                            <?php if ($row['study'] == "YES") {
+                                                                                                                                                                echo "checked";
+                                                                                                                                                            } ?>>
                                                                                                         Y
                                                                                                         <input
                                                                                                             type="radio"
                                                                                                             name="study"
-                                                                                                            value="NO">
+                                                                                                            value="NO"
+                                                                                                            <?php if ($row['study'] == "NO") {
+                                                                                                                                                            echo "checked";
+                                                                                                                                                        } ?>>
                                                                                                         N
                                                                                                         <br>
                                                                                                     <div
@@ -729,31 +741,46 @@ if (isset($_POST['update2'])) {
                                                                                                         <input
                                                                                                             type="radio"
                                                                                                             name="pool"
-                                                                                                            value="กลัวมาก">
+                                                                                                            value="กลัวมาก"
+                                                                                                            <?php if ($row['pool'] == "กลัวมาก") {
+                                                                                                                                                                echo "checked";
+                                                                                                                                                            } ?>>
                                                                                                         กลัวมาก
                                                                                                         <br>
                                                                                                         <input
                                                                                                             type="radio"
                                                                                                             name="pool"
-                                                                                                            value="ค่อนข้างกลัวน้ำ">
-                                                                                                        ค่อยข้างกลัวน้ำ
+                                                                                                            value="ค่อนข้างกลัวน้ำ"
+                                                                                                            <?php if ($row['pool'] == "ค่อนข้างกลัวน้ำ") {
+                                                                                                                                                                        echo "checked";
+                                                                                                                                                                    } ?>>
+                                                                                                        ค่อนข้างกลัวน้ำ
                                                                                                         <br>
                                                                                                         <input
                                                                                                             type="radio"
                                                                                                             name="pool"
-                                                                                                            value="ปานกลาง">
+                                                                                                            value="ปานกลาง"
+                                                                                                            <?php if ($row['pool'] == "ปานกลาง") {
+                                                                                                                                                                echo "checked";
+                                                                                                                                                            } ?>>
                                                                                                         ปานกลาง
                                                                                                         <br>
                                                                                                         <input
                                                                                                             type="radio"
                                                                                                             name="pool"
-                                                                                                            value="คุ้นเคย">
+                                                                                                            value="คุ้นเคย"
+                                                                                                            <?php if ($row['pool'] == "คุ้นเคย") {
+                                                                                                                                                                echo "checked";
+                                                                                                                                                            } ?>>
                                                                                                         คุ้นเคย
                                                                                                         <br>
                                                                                                         <input
                                                                                                             type="radio"
                                                                                                             name="pool"
-                                                                                                            value="ชอบน้ำมาก">
+                                                                                                            value="ชอบน้ำมาก"
+                                                                                                            <?php if ($row['pool'] == "ชอบน้ำมาก") {
+                                                                                                                                                                    echo "checked";
+                                                                                                                                                                } ?>>
                                                                                                         ชอบน้ำมาก
                                                                                                         <br>
                                                                                                     </p>
@@ -762,12 +789,18 @@ if (isset($_POST['update2'])) {
                                                                                                         <input
                                                                                                             type="radio"
                                                                                                             name="disease"
-                                                                                                            value="YES">
+                                                                                                            value="YES"
+                                                                                                            <?php if ($row['disease'] == "YES") {
+                                                                                                                                                                echo "checked";
+                                                                                                                                                            } ?>>
                                                                                                         Y
                                                                                                         <input
                                                                                                             type="radio"
                                                                                                             name="disease"
-                                                                                                            value="NO">
+                                                                                                            value="NO"
+                                                                                                            <?php if ($row['disease'] == "NO") {
+                                                                                                                                                                echo "checked";
+                                                                                                                                                            } ?>>
                                                                                                         N
                                                                                                         <br><br>
                                                                                                         รายละเอียด
