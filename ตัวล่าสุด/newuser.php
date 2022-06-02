@@ -235,6 +235,41 @@ if (isset($_POST['update2'])) {
     .sidebar .nav-link.active {
         color: #0d6efd;
     }
+
+    body {
+        background: #eeeded;
+    }
+
+    .card {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        transition: all 0.2s ease-in-out;
+        box-sizing: border-box;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background-color: #FFF;
+    }
+
+    .card:hover {
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    }
+
+    .card>.card-inner {
+        padding: 10px;
+    }
+
+    .card .header h2,
+    h3 {
+        margin-bottom: 0px;
+        margin-top: 0px;
+    }
+
+    .card .header {
+        margin-bottom: 5px;
+    }
+
+    .card img {
+        width: 100%;
+    }
     </style>
 
 </head>
@@ -294,7 +329,7 @@ if (isset($_POST['update2'])) {
                     <div class="card mb-3">
                         <div class="card-body">
                             <h1 class="mt-5">ข้อมูลนักกีฬา</h1>
-                            <h3 class="mt-2">Application Form</h3>
+                            <h3 class="mt-2">Application Form</h3> <br>
                             <button type="button" class="btn btn-success" data-toggle="modal"
                                 data-target="#exampleModal">
                                 เพิ่มนักกีฬา
@@ -418,7 +453,7 @@ if (isset($_POST['update2'])) {
                                                                                     <div class="container-fluid">
                                                                                         <a class="navbar-brand"
                                                                                             href="#">
-                                                                                            <img src="image/1 KKU new.png"
+                                                                                            <img src="image1 KKU new.png"
                                                                                                 alt="" width="30"
                                                                                                 height="24"
                                                                                                 class="d-inline-block align-text-top">
@@ -429,7 +464,7 @@ if (isset($_POST['update2'])) {
                                                                                 <div class="modal-header">
                                                                                     <div
                                                                                         class="container row col-lg-12">
-                                                                                        <form action="newuser.php"
+                                                                                        <form action="newusery.php"
                                                                                             method="post"
                                                                                             enctype="multipart/form-data">
                                                                                             <div class="row">

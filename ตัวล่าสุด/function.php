@@ -3,7 +3,7 @@
 define('DB_SERVER', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'kkuswim', 'listprogram');
+define('DB_NAME', 'kkuswim');
 
 class DB_con
 {
@@ -34,10 +34,10 @@ class DB_con
 
 
     //เพิ่มข้อมูล record
-    public function insert($day, $poise, $distance, $timer)
+    public function insert($day, $poise, $distance, $timer, $babydetail_id)
     {
-        $result = mysqli_query($this->dbcon, "INSERT INTO record(day, poise, distance, timer) 
-        VALUES('$day', '$poise', '$distance', '$timer')");
+        $result = mysqli_query($this->dbcon, "INSERT INTO record(day, poise, distance, timer, babydetail_id) 
+        VALUES('$day', '$poise', '$distance', '$timer', '$babydetail_id')");
         return $result;
     }
 
@@ -176,7 +176,9 @@ class DB_con
     public function fetchdata4()
     {
         $result = mysqli_query($this->dbcon, "SELECT * FROM `babydetail`, parentdetail, inquiry 
-        WHERE babydetail.parent_id = parentdetail.quiry_id = inquiry.quiry_id  AND babydetail.status = '1'");
+        WHERE babydetail.parent_id = parentdetail.id 
+        AND parentdetail.quiry_id = inquiry.inquiry_id  
+        AND babydetail.status = '1'");
         return $result;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -213,4 +215,22 @@ class DB_con
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //ดึงสองตารางมาโชว์ของหน้า showrecord.php
+    public function fetchdata6()
+    {
+        $result = mysqli_query($this->dbcon, "SELECT * FROM babydetail
+        WHERE 1");
+        return $result;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public function searchprogram($list)
+    {
+        $day1 = date('Y-m-d');
+        $result = mysqli_query($this->dbcon, "INSERT INTO listprogram(list,) 
+        VALUES('$list',)");
+        return $result;
+    }
 }

@@ -1,3 +1,25 @@
+<link rel="shortcut icon" type="image/x-icon" href="image/favicon.ico">
+
+<?php
+include_once('function.php');
+include_once('date.php');
+
+
+
+function timeDiff($tt)
+{ //function เปลี่ยนเวลาเป็น มิลลิวินาที
+    $time = explode(':', $tt);
+    $s1 = $time[0] * 60;
+
+    $time2 = explode('.', $time[1]);
+    $s2 = $time2[0] * 1000;
+    $s3 = $time2[1];
+
+    $s = ($s1 * 1000) + $s2 + $s3;
+    return $s;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -142,8 +164,8 @@
                     <div class="row">
                         <div class="card">
                             <div class="card-body">
+
                                 <h3 class="card-header my-2">ตารางการซ้อม</h3>
-                                <p>The card shows the information of each type of swimming posture.</p>
                                 <div class="row my-4">
                                     <div class="table-responsive">
                                         <table class="table" id="customers">
@@ -158,9 +180,71 @@
                                                 <th>ความต่างของเวลา</th>
                                             </thead>
                                             <tbody>
+                                                <?php
+
+                                                include_once('function.php');
+                                                $fetchdata = new DB_con();
+                                                $i = 1;
+                                                $sql = mysqli_query($fetchdata->dbcon, "SELECT * FROM `babydetail`, record WHERE babydetail.id = record.babydetail_id AND babydetail.id = '" . $_GET['id'] . "' ");
+                                                while ($row = mysqli_fetch_array($sql)) {
+
+                                                ?>
                                                 <tr>
 
+                                                    <td><?php echo $i; ?></td>
+                                                    <td><?php echo $row['day']; ?></td>
+                                                    <td><?php echo $row["poise"]; ?></td>
+                                                    <td><?php echo $row['distance']; ?></td>
+                                                    <td><?php echo $row['timer']; ?></td>
+                                                    <td>
+                                                        <select name="search" required>
+                                                            <option value=""> รายการแข่งที่ใช้เปรียบเที่ยบ</option>
+                                                            <?php
+                                                                $sql4 = "SELECT list FROM listprogram WHERE list != '' GROUP BY list";
+                                                                $result4 = mysqli_query($fetchdata->dbcon, $sql4);
+                                                                while ($row4 = mysqli_fetch_array($result4)) {
+                                                                    echo '<option value="' . $row4['list'] . '"> ' . $row4['list'] . '</option>';
+                                                                }
+                                                                ?>
+                                                        </select>
+
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                            $sql4 = "SELECT * FROM `statswim` WHERE `distance` 
+                                                            LIKE '" . $row["poise"] . " " . $row["distance"] . "' AND `sex` = '" . $_GET["sex"] . "'";
+                                                            $result4 = mysqli_query($fetchdata->dbcon, $sql4);
+                                                            while ($row4 = mysqli_fetch_array($result4)) {
+                                                                //echo $row4['no'] . ' = ' . $row4['8_9'] . '/' . timeDiff($row4['8_9']) . '<br>';
+                                                                $dcd[] = $row4['8_9'];
+                                                                $no[] = $row4['no'];
+                                                            }
+                                                            $timeee = $row['timer'];
+                                                            //เวลาที่นักเรียนทำได้
+                                                            if (timeDiff($timeee) <= timeDiff($dcd[0])) {
+                                                                echo 'ลำดับที่ ' . $no[0];
+                                                            } else if (timeDiff($dcd[0]) < timeDiff($timeee) && timeDiff($timeee) <= timeDiff($dcd[1])) {
+                                                                echo $no[1];
+                                                            } else if (timeDiff($dcd[1]) < timeDiff($timeee) && timeDiff($timeee) <= timeDiff($dcd[2])) {
+                                                                echo $no[2];
+                                                            } else if (timeDiff($dcd[2]) < timeDiff($timeee) && timeDiff($timeee) <= timeDiff($dcd[3])) {
+                                                                echo $no[3];
+                                                            } else if (timeDiff($dcd[3]) < timeDiff($timeee) && timeDiff($timeee) <= timeDiff($dcd[4])) {
+                                                                echo $no[4];
+                                                            } else if (timeDiff($dcd[4]) < timeDiff($timeee) && timeDiff($timeee) <= timeDiff($dcd[5])) {
+                                                                echo $no[5];
+                                                            } else if (timeDiff($dcd[5]) < timeDiff($timeee) && timeDiff($timeee) <= timeDiff($dcd[6])) {
+                                                                echo $no[6];
+                                                            } else if (timeDiff($dcd[6]) < timeDiff($timeee) && timeDiff($timeee) <= timeDiff($dcd[7])) {
+                                                                echo $no[7];
+                                                            }
+
+                                                            ?>
+                                                    </td>
+
                                                 </tr>
+                                                <?php $i++;
+                                                } ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -168,6 +252,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
             </main>
 
 

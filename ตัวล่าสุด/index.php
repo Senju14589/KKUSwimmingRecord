@@ -62,6 +62,41 @@
     .sidebar .nav-link.active {
         color: #0d6efd;
     }
+
+    body {
+        background: #eeeded;
+    }
+
+    .card {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        transition: all 0.2s ease-in-out;
+        box-sizing: border-box;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background-color: #FFF;
+    }
+
+    .card:hover {
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    }
+
+    .card>.card-inner {
+        padding: 10px;
+    }
+
+    .card .header h2,
+    h3 {
+        margin-bottom: 0px;
+        margin-top: 0px;
+    }
+
+    .card .header {
+        margin-bottom: 5px;
+    }
+
+    .card img {
+        width: 100%;
+    }
     </style>
 </head>
 
@@ -214,50 +249,7 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-xl-12 mb-4 mb-lg-0 mt-5">
-                    <div class="card">
-                        <h5 class="card-header">บันทึกผลการแข่งขัน</h5>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table" id="customers">
-                                    <thead>
-                                        <th>ลำดับ</th>
-                                        <th>รายการแข่งขัน</th>
-                                        <th>รุ่นอายุ</th>
-                                        <th>เพศ</th>
-                                        <th>สถิติ</th>
-                                        <th>อันดับที่</th>
-                                        <th>ท่าว่ายน้ำ</th>
-                                    </thead>
 
-                                    <tbody>
-                                        <?php
-
-                                        include_once('function.php');
-                                        $fetchdata = new DB_con();
-                                        $sql = $fetchdata->fetchdata();
-                                        while ($row = mysqli_fetch_array($sql)) {
-
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $row['id']; ?></td>
-                                            <td><?php echo $row['list']; ?></td>
-                                            <td><?php echo $row['age']; ?></td>
-                                            <td><?php echo $row['sex']; ?></td>
-                                            <td><?php echo $row['statistics']; ?></td>
-                                            <td><?php echo $row['number']; ?></td>
-                                            <td><?php echo $row['style']; ?></td>
-                                        </tr>
-                                        <?php
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <a href="record.php" class="btn btn-block btn-success">เพิ่มบันทึกรายการแข่งขัน</a>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-12 col-xl-12 mb-4 mb-lg-0 mt-5">
                     <div class="card">
                         <h5 class="card-header">รายการแข่งขัน</h5>

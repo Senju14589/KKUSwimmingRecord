@@ -6,6 +6,7 @@ include_once('function.php');
 $deletedata = new DB_con();
 $insertdata = new DB_con();
 $updatedata = new DB_con();
+$selecteddata = new DB_con();
 
 //ลบข้อมูล
 if (isset($_GET['del'])) {
@@ -22,6 +23,7 @@ if (isset($_GET['del'])) {
 $error = null;
 // เพิ่มข้อมูล
 if (isset($_POST['insert'])) {
+    $babydetail_id = $_POST['id'];
     $day = $_POST['day'];
     $poise = $_POST['poise'];
     $distance = $_POST['distance'];
@@ -29,7 +31,8 @@ if (isset($_POST['insert'])) {
 
 
 
-    $sql = $insertdata->insert($day, $poise, $distance, $timer);
+
+    $sql = $insertdata->insert($day, $poise, $distance, $timer, $babydetail_id);
     if ($sql) {
         echo "<script>alert('ข้อมูลบันทึกสำเร็จ!');</script>";
         //echo "<script>window.location.href='record.php'</script>";
@@ -201,17 +204,11 @@ if (isset($_POST['update'])) {
                 </div>
             </nav>
             <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="record.php">บันทึกผลการซ้อมของนักกีฬา</a></li>
-                    </ol>
-                </nav>
                 <div class="container">
                     <div class="card mb-3">
-                        <img src="image/1.png" class="card-img-top" alt="...">
                         <div class="card-header">
-                            <h1 class="mt-5">บันทึกผลการซ้อม</h1>
-                            <h3 class="mt-2">Record Match</h3>
+                            <h1 class="mt-5 text-right">บันทึกผลการซ้อม</h1>
+                            <h5 class="mt-2 text-right">รายชื่อนักกีฬา</h5>
                             <hr>
 
                             <div class="row">
@@ -223,13 +220,13 @@ if (isset($_POST['update'])) {
                                 while ($row = mysqli_fetch_array($sql)) {
                                 ?>
 
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                     <div class="card card-block">
                                         <div class="card-body">
                                             <div class="image">
                                                 <img src="<?php echo $row['image']; ?>" width="200px" height="290px"
                                                     alt="" />
-                                            </div>
+                                            </div> <br>
                                             <div class="card-inner">
                                                 <div class="header">
                                                     <h4>ชื่อ :<?php echo $row['name'] . " " . $row['lastname']; ?>
@@ -237,12 +234,105 @@ if (isset($_POST['update'])) {
                                                     <p>ชื่อเล่น :<?php echo $row['nickname']; ?></p>
                                                 </div>
                                                 <div class="content">
-                                                    <button type="button" class="btn btn-success" data-toggle="modal"
-                                                        data-target="#exampleModal">
+                                                    <button type="button" class="btn btn-success sm btn-block"
+                                                        data-toggle="modal"
+                                                        data-target="#exampleModal<?php echo $row['id']; ?>">
                                                         เพิ่มข้อมูลการซ้อม
-                                                    </button>
-                                                    <a href="showrecord.php"
-                                                        class="btn btn-primary <?php echo $row['id']; ?>">ดูบันทึกผลการซ้อม</a>
+                                                    </button> <br>
+                                                    <div class="modal fade" id="exampleModal<?php echo $row['id']; ?>"
+                                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <div class="container row col-lg-12">
+                                                                        <nav class="navbar bg-light">
+                                                                            <div class="container-fluid">
+                                                                                <a class="navbar-brand" href="#">
+
+                                                                                    เพิ่มบันทึกการซ้อม
+                                                                                </a>
+                                                                            </div>
+                                                                        </nav>
+                                                                        <form action="" method="post">
+                                                                            <div class="row">
+                                                                                <div
+                                                                                    class="col-12 col-md-12 col-lg-6 mb-8 mb-lg-2">
+                                                                                    <p>
+                                                                                    <h3>กรอกข้อมูลการซ้อม</h3>
+                                                                                    </p>
+                                                                                    <p>
+                                                                                        <input type="hidden" name="id"
+                                                                                            value="<?php echo $row['id']; ?>">
+                                                                                    </p>
+                                                                                    <div class="input-group">
+                                                                                        <label
+                                                                                            class="input-group">วันที่ซ้อม</label>
+                                                                                        <input type="date"
+                                                                                            class="form-control"
+                                                                                            name="day" required>
+                                                                                        <select class="form-select"
+                                                                                            name="poise">
+                                                                                            <option selected>
+                                                                                                ท่าที่ใช้ซ้อม</option>
+                                                                                            <option value="Freestyle">
+                                                                                                Freestyle</option>
+                                                                                            <option value="Backstroke">
+                                                                                                Backstroke</option>
+                                                                                            <option value="Butterfly">
+                                                                                                Butterfly</option>
+                                                                                            <option
+                                                                                                value="Breaststroke">
+                                                                                                Breaststroke</option>
+                                                                                            <option value="IM">IM
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div> <br>
+                                                                                    <div class="input-group mb-3">
+                                                                                        <label
+                                                                                            class="input-group">ระยะทาง/เวลาที่ทำได้
+                                                                                        </label>
+                                                                                        <select class="form-select"
+                                                                                            name="distance">
+                                                                                            <option selected>ระยะทาง
+                                                                                            </option>
+                                                                                            <option value="50 เมตร">50
+                                                                                                เมตร</option>
+                                                                                            <option value="100 เมตร">100
+                                                                                                เมตร</option>
+                                                                                            <option value="200 เมตร">200
+                                                                                                เมตร</option>
+                                                                                        </select>
+                                                                                        <input type="time" name="timer"
+                                                                                            class="form-control"
+                                                                                            placeholder="เวลาที่ทำได้"
+                                                                                            required>
+                                                                                    </div>
+                                                                                </div> <br>
+                                                                                <div
+                                                                                    class="col-12 col-md-12 col-lg-6 mb-8 mb-lg-2">
+                                                                                    <div
+                                                                                        class="card bg-light text-black">
+                                                                                        <img src="image/kkulogo.png"
+                                                                                            class="card-img" alt="...">
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <button type="submit" name="insert"
+                                                                                class="btn btn-success">เพิ่มข้อมูล</button>
+                                                                            <button type="button" class="btn btn-danger"
+                                                                                data-dismiss="modal">ยกเลิก!</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a href="showrecord.php?id=<?php echo $row['id']; ?>
+                                                    &sex=<?php echo $row['sexbaby']; ?>
+                                                    &age=<?php echo $row['agebaby']; ?>"
+                                                        class="btn btn-primary d-sm-block ">ดูบันทึกผลการซ้อม</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -257,67 +347,7 @@ if (isset($_POST['update'])) {
             </main>
         </div>
 
-        <!--- modal เพิ่มข้อมูล -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="container row col-lg-12">
-                            <nav class="navbar bg-light">
-                                <div class="container-fluid">
-                                    <a class="navbar-brand" href="#">
-                                        <img src="image/1 KKU new.png" alt="" width="30" height="24"
-                                            class="d-inline-block align-text-top">
-                                        เพิ่มบึนทึกการซ้อม
-                                    </a>
-                                </div>
-                            </nav>
-                            <form action="" method="post">
-                                <div class="row">
-                                    <div class="col-12 col-md-12 col-lg-6 mb-8 mb-lg-2">
-                                        <p>
-                                        <h3>กรอกข้อมูลการซ้อม</h3>
-                                        </p>
-                                        <div class="input-group">
-                                            <label class="input-group">วันที่ซ้อม</label>
-                                            <input type="date" class="form-control" name="poise" required>
-                                            <select class="form-select" name="day">
-                                                <option selected>ท่าที่ใช้ซ้อม</option>
-                                                <option value="Freestyle">Freestyle</option>
-                                                <option value="Backstroke">Backstroke</option>
-                                                <option value="Butterfly">Butterfly</option>
-                                                <option value="Breaststroke">Breaststroke</option>
-                                                <option value="IM">IM</option>
-                                            </select>
-                                        </div> <br>
-                                        <div class="input-group mb-3">
-                                            <label class="input-group">ระยะทาง/เวลาที่ทำได้ </label>
-                                            <select class="form-select" name="distance">
-                                                <option selected>ระยะทาง</option>
-                                                <option value="50 เมตร">50 เมตร</option>
-                                                <option value="100 เมตร">100 เมตร</option>
-                                                <option value="200 เมตร">200 เมตร</option>
-                                            </select>
-                                            <input type="time" name="timer" class="form-control"
-                                                placeholder="เวลาที่ทำได้" required>
-                                        </div>
-                                    </div> <br>
-                                    <div class="col-12 col-md-12 col-lg-6 mb-8 mb-lg-2">
-                                        <div class="card bg-light text-black">
-                                            <img src="image/kkulogo.png" class="card-img" alt="...">
-                                        </div>
-                                    </div>
 
-                                </div>
-                                <button type="submit" name="insert" class="btn btn-success">เพิ่มข้อมูล</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก!</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
 
