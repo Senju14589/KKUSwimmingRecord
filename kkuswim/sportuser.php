@@ -124,21 +124,21 @@ include_once('function.php');
 
          <?php
 
-            include_once('function.php');
-            $fetchdata = new DB_con();
-            $sql = $fetchdata->fetchdata4();
-            while ($row = mysqli_fetch_array($sql)) {
+         include_once('function.php');
+         $fetchdata = new DB_con();
+         $sql = $fetchdata->fetchdata4();
+         while ($row = mysqli_fetch_array($sql)) {
 
-            ?>
+         ?>
 
          <div class="row">
             <div class="col-lg-4">
                <div class="card mb-4">
                   <div class="card-body text-center">
-                     <img src="<?php echo $row['image']; ?>" alt=" avatar" class="rounded-circle img-fluid"
+                     <img src="<?php echo $_SESSION["UserImage"]; ?>" alt=" avatar" class="rounded-circle img-fluid"
                         style="width: 150px;">
-                     <h5 class="my-3"><?php echo $_SESSION['Username']; ?>
-                        <?php echo $_SESSION['Userlastname']; ?></h5>
+                     <h5 class="my-3"><?php echo $_SESSION['UserName']; ?>
+                        <?php echo $_SESSION['UserLastname']; ?></h5>
 
                      <p class="text-muted mb-1">นักกีฬาว่ายน้ำ</p>
                      <p class="text-muted mb-4">โรงเรียน สาธิตมหาวิทยาลัยขอนแก่น</p>
@@ -158,12 +158,12 @@ include_once('function.php');
                               </nav>
                               <div class="card ">
                                  <div class="card-body text-left">
-                                    <h2 class="card-text">ชื่อ :<?php echo $_SESSION['Username']; ?>
-                                       <?php echo $_SESSION['Userlastname']; ?></h2>
+                                    <h2 class="card-text">ชื่อ :<?php echo $_SESSION['UserName']; ?>
+                                       <?php echo $_SESSION['UserLastname']; ?></h2>
                                     <h5 class="card-text">ชื่อเล่น :<?php echo $_SESSION['UserNickname']; ?></h5>
                                     <h5 class="card-text">เพศ :<?php echo $_SESSION["UserSex"]; ?></h5>
                                     <h5 class="card-text">วันเกิด :<?php echo $_SESSION['UserBirthday']; ?></h5>
-                                    <h5 class="card-text">อายุ :<?php echo $_SESSION['UserAgebaby']; ?></h5>
+                                    <h5 class="card-text">อายุ :<?php echo $_SESSION['UserAge']; ?></h5>
                                     <h5 class="card-text">คุณพ่อชื่อ :<?php echo $_SESSION['UserFather']; ?></h5>
                                     <h5 class="card-text">คุณแม่ชื่อ :<?php echo $_SESSION['UserMother']; ?></h5>
                                     <h5 class="card-text">ที่อยู่ :<?php echo $_SESSION['UserAddress']; ?></h5>
@@ -223,13 +223,13 @@ include_once('function.php');
                                                 <div class="input-group mb-4">
                                                    <select class="form-select" name="sexbaby">
                                                       <option <?php if ($row['sexbaby'] == "ชาย") {
-                                                                                        echo "selected";
-                                                                                    } ?> value="ชาย">
+                                                                     echo "selected";
+                                                                  } ?> value="ชาย">
                                                          ชาย
                                                       </option>
                                                       <option <?php if ($row['sexbaby'] == "หญิง") {
-                                                                                        echo "selected";
-                                                                                    } ?> value="หญิง">
+                                                                     echo "selected";
+                                                                  } ?> value="หญิง">
                                                          หญฺิง
                                                       </option>
                                                    </select>
@@ -266,18 +266,18 @@ include_once('function.php');
                                                 <div class="input-group mb-4">
                                                    <select class="form-select" name="rsfather">
                                                       <option <?php if ($row['rsfather'] == "ยังอยู่ด้วยกัน") {
-                                                                                        echo "selected";
-                                                                                    } ?> value="ยังอยู่ด้วยกัน">
+                                                                     echo "selected";
+                                                                  } ?> value="ยังอยู่ด้วยกัน">
                                                          ยังอยู่ด้วยกัน
                                                       </option>
                                                       <option <?php if ($row['rsfather'] == "หย่าร้าง") {
-                                                                                        echo "selected";
-                                                                                    } ?> value="หย่าร้าง">
+                                                                     echo "selected";
+                                                                  } ?> value="หย่าร้าง">
                                                          หย่าร้าง
                                                       </option>
                                                       <option <?php if ($row['rsfather'] == "แยกกันอยู่") {
-                                                                                        echo "selected";
-                                                                                    } ?> value="แยกกันอยู่">
+                                                                     echo "selected";
+                                                                  } ?> value="แยกกันอยู่">
                                                          แยกกันอยู่
                                                       </option>
                                                    </select>
@@ -295,18 +295,18 @@ include_once('function.php');
                                                 <div class="input-group mb-4">
                                                    <select class="form-select" name="rsmother">
                                                       <option <?php if ($row['rsmother'] == "ยังอยู่ด้วยกัน") {
-                                                                                        echo "selected";
-                                                                                    } ?> value="ยังอยู่ด้วยกัน">
+                                                                     echo "selected";
+                                                                  } ?> value="ยังอยู่ด้วยกัน">
                                                          ยังอยู่ด้วยกัน
                                                       </option>
                                                       <option <?php if ($row['rsmother'] == "หย่าร้าง") {
-                                                                                        echo "selected";
-                                                                                    } ?> value="หย่าร้าง">
+                                                                     echo "selected";
+                                                                  } ?> value="หย่าร้าง">
                                                          หย่าร้าง
                                                       </option>
                                                       <option <?php if ($row['rsmother'] == "แยกกันอยู่") {
-                                                                                        echo "selected";
-                                                                                    } ?> value="แยกกันอยู่">
+                                                                     echo "selected";
+                                                                  } ?> value="แยกกันอยู่">
                                                          แยกกันอยู่
                                                       </option>
                                                    </select>
@@ -423,19 +423,17 @@ include_once('function.php');
                                  <th>ระยะทาง</th>
                                  <th>เวลา</th>
                                  <th>รายการแข่งที่ใช้เปรียบเที่ยบ</th>
-                                 <th>ลำดับความใกล้เคียง</th>
-                                 <th>ความต่างของเวลา</th>
                               </thead>
                               <tbody>
                                  <?php
 
-                                                include_once('function.php');
-                                                $fetchdata = new DB_con();
-                                                $i = 1;
-                                                $sql = mysqli_query($fetchdata->dbcon, "SELECT * FROM `babydetail`, record WHERE babydetail.id = record.babydetail_id AND babydetail.id = '" . $_GET['id'] . "' ");
-                                                while ($row = mysqli_fetch_array($sql)) {
+                                    include_once('function.php');
+                                    $fetchdata = new DB_con();
+                                    $i = 1;
+                                    $sql = mysqli_query($fetchdata->dbcon, "SELECT * FROM babydetail, record WHERE babydetail.id = record.babydetail_id AND babydetail.id = '" . $_GET['id'] . "' ");
+                                    while ($row = mysqli_fetch_array($sql)) {
 
-                                                ?>
+                                    ?>
 
                                  <tr>
 
@@ -471,12 +469,12 @@ include_once('function.php');
                                                                   รายการแข่งที่ใช้เปรียบเที่ยบ
                                                                </option>
                                                                <?php
-                                                                                            $sql4 = "SELECT * FROM listprogram ";
-                                                                                            $result4 = mysqli_query($fetchdata->dbcon, $sql4);
-                                                                                            while ($row4 = mysqli_fetch_array($result4)) {
-                                                                                                echo '<option value="' . $row4['id'] . '"> ' . $row4['list'] . '</option>';
-                                                                                            }
-                                                                                            ?>
+                                                                     $sql4 = "SELECT * FROM listprogram ";
+                                                                     $result4 = mysqli_query($fetchdata->dbcon, $sql4);
+                                                                     while ($row4 = mysqli_fetch_array($result4)) {
+                                                                        echo '<option value="' . $row4['id'] . '"> ' . $row4['list'] . '</option>';
+                                                                     }
+                                                                     ?>
                                                             </select>
                                                             <input class="btn btn-success" type="submit"
                                                                value="เปรียบเที่ยบ">
@@ -503,10 +501,24 @@ include_once('function.php');
                                     </td>
                                  </tr>
                                  <?php $i++;
-                                                } ?>
+                                    } ?>
                               </tbody>
                            </table>
                         </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-12">
+                  <div class="card">
+                     <div class="card-body">
+                        <div class="card">
+                           <h5 class="card-header">ข้อมูลต่างๆของนักกีฬา</h5>
+                           <h9 class="card-header mt-2">กราฟแสดงข้อมูลการซ้อมของนักกีฬา</h9>
+                           <div class="card-body">
+                              <div id="traffic-chart"></div>
+                           </div>
+                        </div>
+                        <a href="" class="card-link">12 ครั้งย้อนหลัง</a>
                      </div>
                   </div>
                </div>
@@ -530,6 +542,17 @@ include_once('function.php');
    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.jqueryui.min.js"></script>
    <script type="text/javascript">
    $('#example').DataTable();
+   </script>
+   <script>
+   new Chartist.Line('#traffic-chart', {
+      labels: ['January', 'Februrary', 'March', 'April', 'May', 'June'],
+      series: [
+         [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60]
+      ]
+   }, {
+      low: 0,
+      showArea: true
+   });
    </script>
 
 </body>
